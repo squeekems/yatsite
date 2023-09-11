@@ -27,7 +27,7 @@ public class OneShot {
       result.add(new ArrayList<>());
     }
 
-    List<String> lines = openCSV("C:/Users/Owner/Desktop/Results.csv");
+    List<String> lines = openCSV("C:/Users/Owner/Desktop/yatsite/Results.csv");
 
     for (int i = 0; i < lines.size(); i++) {
 
@@ -90,7 +90,7 @@ public class OneShot {
   private List<EventCard> loadEventCards() {
 
     List<EventCard> lstEventDeck = new ArrayList<>();
-    List<String> lines = openCSV("C:/Users/Owner/Desktop/Events.csv");
+    List<String> lines = openCSV("C:/Users/Owner/Desktop/yatsite/Events.csv");
 
     for (String splitLine: lines) {
 
@@ -166,8 +166,8 @@ public class OneShot {
   private List<Item> loadItems() {
 
     List<Item> items = new ArrayList<>();
-    List<String> greater = openCSV("C:/Users/Owner/Desktop/Greater_Loot.csv");
-    List<String> lesser = openCSV("C:/Users/Owner/Desktop/Lesser_Loot.csv");
+    List<String> greater = openCSV("C:/Users/Owner/Desktop/yatsite/Greater_Loot.csv");
+    List<String> lesser = openCSV("C:/Users/Owner/Desktop/yatsite/Lesser_Loot.csv");
 
     for (String splitLine: greater) {
 

@@ -1,6 +1,5 @@
 package com.squeekems.yat.controllers;
 
-import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.squeekems.yat.entities.Event;
 import com.squeekems.yat.entities.Option;
 import com.squeekems.yat.services.EventService;

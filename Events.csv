@@ -1,0 +1,55 @@
+#001,"You run into a merchant. $The merchant says| ""I have wares to sell| if you have coin?""",I attempt to rob the merchant.,I offer my coin.,What can I get for no coin?,I ignore them.
+#002,A little girl is running from a fiery imp. $She is shouting for her father.,I attempt to extinguish the imp.,I run with the girl.,I do nothing and keep moving.,
+#003,A wolf is growling at you.,I run away!,I try to fight it!,I try to intimidate it.,I try to pet it.
+#004,A boar is charging in your direction.,I run away!,I try to fight it!,I try to pet it.,
+#005,You see a fairy running away.,I try to catch it!,I follow it!,I ignore it. ,
+#006,"You hear galloping and shouting.$You turn to see a horse-drawn carriage gliding past you.$""We have to pickup Miss Kay and Sir Rex!"" ",I try to jump on it!,I try to fight it!,I do nothing.,
+#007,"You notice a wizard is casting a spell at you. $There is lightning all around him. $He shouts| ""This is for your own good!""",I try to dodge him!,I try to stop him!,I do nothing.,I cast a spell!
+#009,You hear a siren's call.,I follow it.,I attempt to ignore it.,I try to fight it!,I try to counter it with a spell.
+#010,A gelatinous cube rises from the ground in your path.,I poke it.,I go around it.,I try to fight it!,I run away!
+#011,"A man| wearing a scale-thread cloak| quickly hands you a page torn from a book and says| ""Speak the words and fly!"" $He runs away with a woman.}At dragons ways","I say| ""On dragon's wing!""","I say| ""At dragons ways!""","I say| ""To dragon's cave!""","I say| ""By dragon swing!"""
+#012,A tree is falling on you!,I try to dodge it.,I run away!,I try to fight it!,I do nothing.
+#013,A bear growls at you and begins to charge.,I run away!,I try to fight it!,I try to intimidate it.,I try to pet it.
+#014,You notice something shiny!,I inspect it.,I go to pick it up.,I try to fight it!,I leave it.
+#015,You notice a woman standing calmly holding lilies.,I ignore her and keep going.,I run away!,I try to fight her!,I ask her for a lily.
+#016,A man is pointing to three levers. $Which one do you pull?,I pull the first lever.,I pull the second lever.,I pull the third lever.,I pull none and keep moving.
+#017,You see a bee hive in your path as you speed through the woods.,I try to dodge it.,I go around it.,I try to fight it!,I run away!
+#018,A building is consumed in fire leaving behind nothing but a fiery hound standing over ashe and coals. $It is gritting its black teeth at you.,I attempt to extinquish the hound.,I run away!,I try to fight it!,I do nothing.
+#019,A sorceress stops you to challenge you to a duel.,I ignore her and keep going.,I run away!,I try to fight her!,I accept her challenge.
+#026,You feel as though you are being watched. $You spot a mountain lion stalking you.,I run away!,I try to fight it!,I try to intimidate it.,I try to pet it.
+#027,The dragon slams down before you with a rumble. $It is ready to attack.,I run away!,I try to fight it!,I try to intimidate it.,I try to pet it.
+#028,"A woman runs into you. $She stares into your eyes and puts a pendant in your hands. $A man| wearing a cloak| calls to her. ""What are you doing| Zona? We have to go!""",I take the pendant with me.,I leave the pendant.,,
+#029,You notice a weapon laying under an armored corpse.,I inspect the weapon.,I take the weapon.,I leave the weapon.,
+#029,You find a weapon gleaming at the blacksmith.,I inspect the weapon.,I take the weapon.,I leave the weapon.,
+#030,A tome whips by your head as you pass an exploding building.,I inspect the tome.,I take the tome with me.,I leave the tome.,
+#031,You notice a book floating.,I inspect the book.,I take the book with me.,I leave the book.,
+#032,You come across a small barn. $It may have something useful as a weapon.,I inspect the barn.,I ignore it and keep going.,,
+#033,An elegantly designed pole lands| stabbing into the dirt| in front of you.,I inspect the weapon.,I take the weapon.,I leave the weapon.,
+#034,An elf stands before you carrying a book with her. She challenges you to a duel.,I accept her challenge.,I inspect her book.,I attempt to steal her book.,I ignore her and keep going.
+#036,A huge carved pumpkin rolls towards you. $The carvings are glowing.,I inspect the pumpkin.,I smash the pumpkin.,I try to fight it.,I ignore it.
+#038,There is something potentially helpful hidden behind a creepy spider.,I squish the spider.,I guide the spider away.,I run away!,I ignore it.
+#039,"A man frantically emerges from a building. $""This makes no sense! It took 1 artifact worth 30 coins| then 2 artifacts worth 40 coins. It took 4 artifacts worth 60 coins from the last town! What does it want here?!",Four artifacts worth 60 coins?,Three artifacts worth 50 coins?,Eight artifacts worth 50 coins?,Do I look like a scholar?
+#040,"You notice a gypsy sitting in the back of a wagon. $She says| ""I see something peculiar in your future.""",I ask her for my fortune.,I ignore her and keep going.,I try to pet her.,
+#041,"""I am telling you| Lucius: Glinda is not helping!"" $You overhear a man speaking to himself with his index and middle finger on his temple.",I ignore him and keep going.,I politely ask what he is talking about.,I politely ask if he is crazy.,I aggressively ask what he is talking about.
+#042,Two hobbes catch you traveling through the forest.,I run away!,I try to fight them!,I bargain with them to pass.,
+#044,"A person| wearing a scale-thread cloak| runs past you dropping a flurry of papers. Most of the papers are ruined in the mud except for one that so easily lands in your hands. $You hear a woman shout to the cloaked individual| ""Let's go| Arthur!""}Grant my wish","I hold the paper up and say| ""Grant my wish.""","I say| ""Grant my wish?""","I say| ""Grant my wish.""",I toss the paper and keep moving.
+#045,A group of knights are charging in the direction you are going!,I try to hitch a ride!,I try to fight them!,I do nothing.,
+#046,"A man runs out of the blacksmith calling to you| ""Catch!"" $A shield is flying at you.",I catch it!,I dodge it!,I keep going.,
+#047,"An arrow lands in the dirt at your feet. Looking at where it came from| a man is preparing to shoot another arrow in your direction. Search the Lesser Loot pile for a card titled| ""Arrow|"" and take it with you.",I dodge it.,I run away!,I'll shoot back with my bow.,
+#048,You hear heavy breathing and see footprints being made running away. An invisible person?,I ignore them and keep going.,I aggressively stop them.,I politely stop them.,
+#049,You are knocked to the ground.$A couple men of the church are attacking you.,I run away!,I try to fight them!,"I ask them| ""Why attack me?""",I cast a spell!
+#050,You notice a unicorn is casting a spell at you. $Pink lightning fizzles from its horn.,I try to dodge it!,I try to stop it!,I do nothing.,I cast a spell!
+#051,You see a hefty stick leaning against a fence.,I inspect the stick.,I take the stick.,I leave the stick.,
+#053,"You run into a merchant. $The merchant says| ""Do you have anything to trade with me?""",I will trade a Greater Loot item.,I will trade a Lesser Loot item.,I will trade 2 Lesser Loot items.,I ignore them.
+#054,A goose honks at you.,I run away!,I try to fight it!,I try to intimidate it.,I ignore it.
+#055,You run into a goose.,I ignore it.,,,
+#061,"You witness a woman shot down by a blast of fire. Her weapon falls in front of you. ""Please take it. Save... The town..."" She faints.",I inspect the weapon.,I take the weapon.,I leave the weapon.,
+#062,A man is pointing to three levers. $Which one do you pull?,I pull the first lever.,I pull the second lever.,I pull the third lever.,I pull none and keep moving.
+#063,A man is pointing to three levers. $Which one do you pull?,I pull the first lever.,I pull the second lever.,I pull the third lever.,I pull none and keep moving.
+#065,You hear beautiful exciting music coming from a string instrument nearby. You witness the musician dancing around a group of creatures. The creatures seem to be defeated by his music! One after another drops| but he misses one big creature sneaking up behind him. The musician is destroyed by the creature and his instrument falls at your feet.,I take the weapon.,I leave the weapon.,,
+#066,You notice a well.,I inspect the well.,I try to get water.,I toss my coin in it.,I ignore it and keep going.
+#068,You notice a pile of junk.,I inspect the pile.,I take something from the pile.,I ignore the pile and keep going.,
+#070,You hear a growl behind you. $A wolf-man snarls at you. He is prepared to attack.,I ignore him and keep going.,I run away!,I try to fight him!,
+#071,"A man stops you and says| ""Excuse me| traveler| but you will need to have some good wits to defeat that beast. Answer this riddle: Which has more tails? One dog| no dog| or two dogs?""","I say| ""One dog.""","I say| ""No dog.""","I say| ""Two dogs.""","I say| ""No idea."""
+#072,"A cloaked man hands you a slip of paper and says| ""This is the answer to a magic riddle: When I take five and add six| I get eleven| but when I take six and add seven| I get one. What am I?""}I am the clock","I say| ""I'm bad luck?""","I say| ""I am a clock?""","I say| ""I am a math teacher?""","I say| ""I am clueless."""
+#073,You notice a paper glowing on the ground.$You turn it over to see something written on it.}Healing fire,"I say| ""Healing fire.""","I say| ""Choking fire.""","I say| ""Hurrying fire.""",I ignore it.

@@ -1,0 +1,14 @@
+Arrow,Item,,,5
+Stick,Weapon - Polearm,2,"You may combine this card with a card named| ""Bucket|"" to create a new weapon named| ""Bucket on a Stick"" that has the total damage of both weapons. It has the same type and effects as both weapons.",2
+Bucket,Weapon - Mace,2,,4
+Knife,Weapon - Blade,2,Discard: Move target player's Damage Tracker up by 1 for an attack.,4
+Tome of Bludgeoning,Weapon - Mace,2,Discard: Move target nearby player's Damage Tracker up by 2 for an attack.,4
+Coin,Item,,,3
+Rocks,Item,+2,"If your equipped weapon does not have ""Bucket"" in the name or if you have another card that shares a name with this card| discard this card.",2
+Water,Item,+2,"If your equipped weapon does not have ""Bucket"" in the name or if you have another card that shares a name with this card| discard this card.",2
+Tankard,Weapon - Mace,2,Consider this effect when you attack. Roll a D20 to attack. If the attack roll is greater than 10| you break this mug in the attack. Move your Damage Tracker up by 1 for an attack. Discard this card after the attack.,4
+Sword,Weapon - Blade of War,4,,2
+Axe,Weapon - Blade,4,,2
+Scythe,Weapon - Polearm,4,,2
+Hoe,Weapon - Polearm,4,,2
+Invisithreaded Cloak,Item,,,2

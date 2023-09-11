@@ -1,0 +1,27 @@
+Fiery Imp,Lesser Elemental,+1,"Move your Damage Tracker up by 1 if your equipped weapon has ""Magic"" in the name.",1
+Wolf,Lesser Beast,+1,,1
+Fairy,Lesser Elemental,+1,,1
+Lily of Power,Item,+2,,2
+Pendant of Power,Item,+2,"Move your Damage Tracker up by 1 if your equipped weapon has ""Magic"" in the name.",2
+Xiaolin Martial Arts,Tome of Knowledge,+1,"Move your Damage Tracker up by 2 if your equipped weapon is considered a polearm.$Move your Damage Tracker up by 1 if your equipped weapon has ""Xiaolin Staff"" in the name.$If you have another card that shares a name with this card| discard this card. """,2
+Encyclopedia Magica,Tome of Knowledge,+0,"Move your Damage Tracker up by 3 if your equipped weapon has ""Magic"" in the name.$If you have another card that shares a name with this card| discard this card. ",2
+Battleaxe,Weapon - Blade of War,6,,2
+Magic Staff,Weapon - Magic,3,Discard: Move your Progress Tracker up by 3.,2
+Bard's Yute,Weapon - String Instrument,1,Discard: Move your Progress Tracker down by 1 to ignore the results of an event.,1
+Halbert,Weapon - Polearm of War,4,,2
+Bow,Weapon - Ranged,3,Discard an Arrow:Move your Damage Tracker up by 4 for an attack.$Discard an Arrow: Move target player's Damage Tracker up by 3 for an attack.,2
+Magic Wand,Weapon - Magic,2,Discard: Move your Progress Tracker up by 2.,1
+Element Capture Box,Item,,"Discard this card during an Event Card with ""fiery"" in the prompt. You ignore the results of the event.$If the Event Card also has ""imp"" in the prompt| search the Greater Loot pile for a card named| ""Fiery Imp|"" and take it with you.$If the Event Card also has ""hound"" in the prompt| search the Greater Loot pile for a card named| ""Fiery Hound|"" and take it with you.",1
+Fiery Hound,Greater Elemental,+2,"Move your Damage Tracker up by 1 if your equipped weapon has ""Magic"" in the name.",1
+Xiaolin Staff,Weapon - Polearm of War,4,,2
+Art of War,Tome of Knowledge,+0,Move your Damage Tracker up by 2 if your equipped weapon is considered a weapon of war.$If you have another card that shares a name with this card| discard this card.,2
+Dagger,Weapon - Blade of War,4,You may dual wield this weapon.,3
+Last Prophet,Tome of Knowledge,+0,Move your Damage Tracker up by 5| if your equipped weapon is considered an instrument.$If you have another card that shares a name with this card| discard this card.,1
+Pick of Destiny,Item,+0,Move your Damage Tracker up by 1| if your equipped weapon is considered a string instrument.$If you have another card that shares a name with this card| discard this card.,1
+Shield,Item,-1,If you are instructed to roll a Saving Throw| you may discard this card instead.,2
+Sigil of Recuperation,Item,,Discard this card| if you fail a Saving Throw. Do not faint.,1
+Invisibility Dye,Item,,"If you have a card named| ""Invisithreaded Cloak|"" you may discard this card to escape combat and move your Progress Tracker up by 2.",2
+Soul Resonator,Item,,Consider this effect when you attack. If you are nearby to another player with a card that shares a name with this card| that player may decide to attack with you. They subtract their damage at the exact same time as you and roll a Saving Throw the same way you would.,2
+Magic Unicorn,Greater Beast,+0,"Move your Damage Tracker up by 3| if your equipped weapon has ""Magic"" in the name.",2
+Weapon Enchantment,Item,-3,"Your equipped weapon has ""Magic "" added to the beginning of its name.",2
+Magic Conch Trumpet,Weapon - Magic Instrument,1,You may discard this card and move your Progress Tracker down by 1 to ignore the results of an event.,1
