@@ -19,16 +19,16 @@ public class EventController {
   @Autowired
   OptionService optionService;
 
+  @GetMapping
+  public List<Event> getEvents() {
+    return eventService.findAll();
+  }
+
   @RequestMapping("/random")
   public Event getRandom() {
     List<Event> cards = getCards();
 
     return cards.get(new Random().nextInt(cards.size()));
-  }
-
-  @GetMapping
-  public List<Event> getEvents() {
-    return eventService.findAll();
   }
 
   @GetMapping("/results")
@@ -79,8 +79,45 @@ public class EventController {
     return eventService.getEventById(id);
   }
 
+  @RequestMapping("/addOption")
+  public void addOption(@RequestParam("id") Long id,
+                        @RequestParam("optionId") Long optionId) {
+    Event event = eventService.getEventById(id);
+    Option option = optionService.getOptionById(optionId);
+    event.getOptions().add(option);
+    eventService.save(event);
+  }
+
+  @RequestMapping("/addOption")
+  public void addOption(@RequestParam("id") Long id,
+                        @RequestParam("option") String option) {
+    Event event = eventService.getEventById(id);
+    Option newOption = new Option(option);
+    event.getOptions().add(newOption);
+    optionService.save(newOption);
+    eventService.save(event);
+  }
+
+  @RequestMapping("/addOption")
+  public void addOption(@RequestParam("id") Long id,
+                        @RequestParam("option") String option,
+                        @RequestParam("result") String result) {
+    Event event = eventService.getEventById(id);
+    Option newOption = new Option(option, result);
+    event.getOptions().add(newOption);
+    eventService.save(newOption.getResult());
+    optionService.save(newOption);
+    eventService.save(event);
+  }
+
   @RequestMapping("/post")
-  public void postResult(@RequestParam("prompt") String prompt,
+  public void postEvent(@RequestParam("prompt") String prompt) {
+    Event event = new Event(prompt);
+    eventService.save(event);
+  }
+
+  @RequestMapping("/post")
+  public void postEvent(@RequestParam("prompt") String prompt,
                          @RequestParam("isCard") boolean isCard,
                          @RequestParam List<String> options,
                          @RequestParam List<String> results) {
@@ -107,6 +144,15 @@ public class EventController {
       System.out.println("The number of Options should be equivalent to the number of Results.");
     }
 
+  }
+
+  @RequestMapping("/removeOption")
+  public void removeOption(@RequestParam("id") Long id,
+                           @RequestParam("optionId") Long optionId) {
+    Event event = eventService.getEventById(id);
+    Option option = optionService.getOptionById(optionId);
+    event.getOptions().remove(option);
+    eventService.save(event);
   }
 
 //  @RequestMapping("/random")

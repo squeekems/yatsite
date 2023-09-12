@@ -18,13 +18,20 @@ public class Option {
   private Event result;
 
   public Option() {}
-  public Option(String label, Event result) {
+
+  public Option(String label) {
+    this();
     this.label = label;
+  }
+
+  public Option(String label, Event result) {
+    this(label);
     this.result = result;
   }
 
-  public Option(String label) {
-    this.label = label;
+  public Option(String label, String result) {
+    this(label);
+    this.result = new Event(result);
   }
 
   public Long getOptionId() {
