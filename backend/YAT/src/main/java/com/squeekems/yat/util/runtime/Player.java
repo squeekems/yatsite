@@ -12,10 +12,19 @@ public class Player {
   private String username;
   private Item equipped;
   private List<Item> inventory;
-  private Room room;
+  private Game game;
+  private int room;
+
+  public Player() {
+  }
 
   public Player(String username) {
     this.username = username;
+  }
+
+  public Player(String username, int room) {
+    this(username);
+    this.room = room;
   }
 
   public Player(String username, Item... inventory) {
@@ -28,14 +37,29 @@ public class Player {
     }
   }
 
+  public Player(String username, int room, Item... inventory) {
+    this(username, inventory);
+    this.room = room;
+  }
+
   public Player(String username, Item equipped, List<Item> inventory) {
     this(username);
     this.equipped = equipped;
     this.inventory = inventory;
   }
 
-  public Player(String username, Item equipped, List<Item> inventory, Room room) {
+  public Player(String username, int room, Item equipped, List<Item> inventory) {
     this(username, equipped, inventory);
+    this.room = room;
+  }
+
+  public Player(String username, Game game, Item equipped, List<Item> inventory) {
+    this(username, equipped, inventory);
+    this.game = game;
+  }
+
+  public Player(String username, int room, Game game, Item equipped, List<Item> inventory) {
+    this(username, game, equipped, inventory);
     this.room = room;
   }
 
@@ -64,12 +88,12 @@ public class Player {
   }
 
   /**
-   * Add this player to a room. Sets their id.
-   * @param room room this player is being added to.
+   * Add this player to a game. Sets their id.
+   * @param game game this player is being added to.
    */
-  public void addTo(Room room) {
-    room.addPlayer(this);
-    this.room = room;
+  public void addTo(Game game) {
+    game.addPlayer(this);
+    this.game = game;
   }
 
   public Long getPlayerId() {
@@ -100,16 +124,24 @@ public class Player {
     return inventory;
   }
 
-  public Room getRoom() {
+  public void setInventory(List<Item> inventory) {
+    this.inventory = inventory;
+  }
+
+  public Game getGame() {
+    return game;
+  }
+
+  public void setGame(Game game) {
+    this.game = game;
+  }
+
+  public int getRoom() {
     return room;
   }
 
-  public void setRoom(Room room) {
+  public void setRoom(int room) {
     this.room = room;
-  }
-
-  public void setInventory(List<Item> inventory) {
-    this.inventory = inventory;
   }
 
   @Override
@@ -119,6 +151,7 @@ public class Player {
         ", username='" + username + '\'' +
         ", equipped=" + equipped +
         ", inventory=" + inventory +
+        ", game=" + game +
         ", room=" + room +
         '}';
   }
