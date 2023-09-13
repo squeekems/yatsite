@@ -5,10 +5,7 @@ import com.squeekems.yat.entities.Option;
 import com.squeekems.yat.services.EventService;
 import com.squeekems.yat.services.OptionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,14 +24,25 @@ public class OptionController {
     return optionService.findAll();
   }
 
+  @CrossOrigin(origins = "http://localhost:3000")
+  @GetMapping("/get")
+  public Option getOption(@RequestParam Long id){
+    return optionService.getOptionById(id);
+  }
+
+  @RequestMapping("/result")
+  public Event getResult(@RequestParam Long id){
+    return optionService.getOptionById(id).getResult();
+  }
+
   @RequestMapping("/post")
   public void postOption(@RequestParam("label") String label) {
     Option option = new Option(label);
     optionService.save(option);
   }
 
-  @RequestMapping("/post")
-  public void postOption(@RequestParam("label") String label, @RequestParam("result") String result) {
+  @RequestMapping("/postString")
+  public void postOptionString(@RequestParam("label") String label, @RequestParam("result") String result) {
     Option option = new Option(label, result);
     eventService.save(option.getResult());
     optionService.save(option);
