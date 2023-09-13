@@ -1,7 +1,9 @@
 package com.squeekems.yat.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -21,6 +23,7 @@ public class Event {
   private boolean isCard;
 
   @ManyToMany(targetEntity = Option.class, fetch = FetchType.EAGER)
+  @JsonManagedReference
   @JoinTable( name = "event_options", joinColumns = { @JoinColumn(name = "event_id") },
     inverseJoinColumns = { @JoinColumn(name = "optionId") })
   private Set<Option> options;
@@ -101,20 +104,36 @@ public class Event {
   @Override
   public int hashCode() {
     int result = prompt.hashCode();
+    Set<Long> optionIds = new HashSet<>();
+
+    if (options != null) {
+      for (Option option : options) {
+        optionIds.add(option.getOptionId());
+      }
+    }
+
     result = 31 * result + (dsPrompt != null ? dsPrompt.hashCode() : 0);
     result = 31 * result + (isCard ? 1 : 0);
-    result = 31 * result + (options != null ? options.hashCode() : 0);
+    result = 31 * result + (options != null ? optionIds.hashCode() : 0);
     return result;
   }
 
   @Override
   public String toString() {
+    Set<Long> optionIds = new HashSet<>();
+
+    if (options != null) {
+      for (Option option : options) {
+        optionIds.add(option.getOptionId());
+      }
+    }
+
     return "Event{" +
         "eventId=" + eventId +
         ", prompt='" + prompt + '\'' +
         ", dsPrompt='" + dsPrompt + '\'' +
         ", isCard=" + isCard +
-        ", options=" + options +
+        (options != null ? ", options=" + optionIds : "") +
         '}';
   }
 }

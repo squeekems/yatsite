@@ -88,8 +88,8 @@ public class EventController {
     eventService.save(event);
   }
 
-  @RequestMapping("/addOption")
-  public void addOption(@RequestParam("id") Long id,
+  @RequestMapping("/addOptionString")
+  public void addOptionString(@RequestParam("id") Long id,
                         @RequestParam("option") String option) {
     Event event = eventService.getEventById(id);
     Option newOption = new Option(option);
@@ -98,8 +98,8 @@ public class EventController {
     eventService.save(event);
   }
 
-  @RequestMapping("/addOption")
-  public void addOption(@RequestParam("id") Long id,
+  @RequestMapping("/addOptionStrings")
+  public void addOptionStrings(@RequestParam("id") Long id,
                         @RequestParam("option") String option,
                         @RequestParam("result") String result) {
     Event event = eventService.getEventById(id);
@@ -116,8 +116,8 @@ public class EventController {
     eventService.save(event);
   }
 
-  @RequestMapping("/post")
-  public void postEvent(@RequestParam("prompt") String prompt,
+  @RequestMapping("/postFull")
+  public void postEventFull(@RequestParam("prompt") String prompt,
                          @RequestParam("isCard") boolean isCard,
                          @RequestParam List<String> options,
                          @RequestParam List<String> results) {
@@ -141,7 +141,8 @@ public class EventController {
       Event event = new Event(prompt, isCard, new HashSet<>(eventOptions));
       eventService.save(event);
     } else {
-      System.out.println("The number of Options should be equivalent to the number of Results.");
+      System.out.println("The number of Options(" + options.size() +
+          ") should be equivalent to the number of Results(" + results.size() + ").");
     }
 
   }
