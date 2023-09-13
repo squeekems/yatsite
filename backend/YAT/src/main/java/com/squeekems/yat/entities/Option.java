@@ -1,5 +1,6 @@
 package com.squeekems.yat.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,6 +15,7 @@ public class Option {
   @Column
   private String label;
   @ManyToOne
+  @JsonBackReference
   @JoinColumn(name = "eventId", referencedColumnName = "eventId")
   private Event result;
 
@@ -72,7 +74,7 @@ public class Option {
   @Override
   public int hashCode() {
     int result1 = label.hashCode();
-    result1 = 31 * result1 + result.hashCode();
+    result1 = 31 * result1 + result.getEventId().hashCode();
     return result1;
   }
 
@@ -81,7 +83,7 @@ public class Option {
     return "Option{" +
         "optionId=" + optionId +
         ", label='" + label + '\'' +
-        ", result=" + result +
+        ", resultId=" + result.getEventId() +
         '}';
   }
 }
