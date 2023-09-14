@@ -4,6 +4,7 @@ import com.squeekems.yat.entities.Item;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class Player {
@@ -16,6 +17,10 @@ public class Player {
   private int room;
 
   public Player() {
+  }
+
+  public Player(int room) {
+    this.room = room;
   }
 
   public Player(String username) {
@@ -154,5 +159,12 @@ public class Player {
         ", game=" + game +
         ", room=" + room +
         '}';
+  }
+}
+
+class PlayerComparator implements Comparator<Player> {
+  @Override
+  public int compare(Player a, Player b) {
+    return a.getRoom() - b.getRoom();
   }
 }
