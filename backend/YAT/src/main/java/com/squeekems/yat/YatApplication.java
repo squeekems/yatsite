@@ -1,5 +1,6 @@
 package com.squeekems.yat;
 
+import com.squeekems.yat.util.runtime.Game;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
