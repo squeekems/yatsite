@@ -1,0 +1,802 @@
+{
+	"info": {
+		"_postman_id": "cbab53a9-3b4e-4900-8d3a-47e766e843a4",
+		"name": "YatApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29479535"
+	},
+	"item": [
+		{
+			"name": "Default API",
+			"item": [
+				{
+					"name": "Event",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"prompt\": \"Welcome to the tavern. Search the Lesser Loot pile for a card titled, \\\"Tome of Bludgeoning\\\" and put it in your equip slot.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/events/266",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"events",
+								"266"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/events/264",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"events",
+								"264"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Event",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/events/272",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"events",
+								"272"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Option",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/options/216",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"options",
+								"216"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Entities",
+			"item": [
+				{
+					"name": "Events",
+					"item": [
+						{
+							"name": "Events",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/events",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Random",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/events/random",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										"random"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Results",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/events/results",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										"results"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cards",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/events/cards",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										"cards"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DSCards",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/events/dsCards",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										"dsCards"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Event",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/events/get?id=309",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "309"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "addOption",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/events/addOption?id=309&optionId=256",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										"addOption"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "309"
+										},
+										{
+											"key": "optionId",
+											"value": "256"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Option String",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/events/addOptionString?id=0&option=I take the item.",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										"addOptionString"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "0"
+										},
+										{
+											"key": "option",
+											"value": "I take the item."
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Option Strings",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/events/addOptionStrings?id=0&option=I take the item.&result=Draw a card from the Lesser Loot pile.",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										"addOptionStrings"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "0"
+										},
+										{
+											"key": "option",
+											"value": "I take the item."
+										},
+										{
+											"key": "result",
+											"value": "Draw a card from the Lesser Loot pile."
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Event",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/events/post?prompt=Draw a card from the Lesser Loot pile.",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										"post"
+									],
+									"query": [
+										{
+											"key": "prompt",
+											"value": "Draw a card from the Lesser Loot pile."
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Event Full",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/events/postFull?prompt=Is there another player who has not told us where they are in the tavern?&isCard=false&options=Yes, No&results=Where are they in the tavern?, Then we can begin with our story...",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										"postFull"
+									],
+									"query": [
+										{
+											"key": "prompt",
+											"value": "Is there another player who has not told us where they are in the tavern?"
+										},
+										{
+											"key": "isCard",
+											"value": "false"
+										},
+										{
+											"key": "options",
+											"value": "Yes, No"
+										},
+										{
+											"key": "results",
+											"value": "Where are they in the tavern?, Then we can begin with our story..."
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "removeOption",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/events/removeOption?id=0&optionId=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										"removeOption"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "0"
+										},
+										{
+											"key": "optionId",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Options",
+					"item": [
+						{
+							"name": "Options",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/options",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"options"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Option",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/options/get?id=253",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"options",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "253"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Result",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/options/result?id=253",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"options",
+										"result"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "253"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Option",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/options/post?label=I grab the item.",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"options",
+										"post"
+									],
+									"query": [
+										{
+											"key": "label",
+											"value": "I grab the item."
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Option String",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/options/postString?label=I grab the item.&result=Draw a card from the Lesser Loot pile.",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"options",
+										"postString"
+									],
+									"query": [
+										{
+											"key": "label",
+											"value": "I grab the item."
+										},
+										{
+											"key": "result",
+											"value": "Draw a card from the Lesser Loot pile."
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "setResult",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/options/setResult?id=0&resultId=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"options",
+										"setResult"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "0"
+										},
+										{
+											"key": "resultId",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "One-shots",
+			"item": [
+				{
+					"name": "Option - Yes. There is another player.",
+					"item": [
+						{
+							"name": "Option - createOption",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/options/post?label=Yes. There is another player.",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"options",
+										"post"
+									],
+									"query": [
+										{
+											"key": "label",
+											"value": "Yes. There is another player."
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Option - setResult",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/options/setResult?id=0&resultId=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"options",
+										"setResult"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "0"
+										},
+										{
+											"key": "resultId",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Option - No. There is no other.",
+					"item": [
+						{
+							"name": "Option - createOption",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/options/post?label=There is no other.",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"options",
+										"post"
+									],
+									"query": [
+										{
+											"key": "label",
+											"value": "There is no other."
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Option - setResult",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/options/setResult?id=0&resultId=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"options",
+										"setResult"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "0"
+										},
+										{
+											"key": "resultId",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "beanTrigger",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/bean",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"bean"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Event - Single or Multiplayer?",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/events/post?prompt=Is there another player who has not told us where they are in the tavern?&isCard=false&options=Yes, No&results=Where are they in the tavern?, Then we can begin with our story...",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events",
+								"post"
+							],
+							"query": [
+								{
+									"key": "prompt",
+									"value": "Is there another player who has not told us where they are in the tavern?"
+								},
+								{
+									"key": "isCard",
+									"value": "false"
+								},
+								{
+									"key": "options",
+									"value": "Yes, No"
+								},
+								{
+									"key": "results",
+									"value": "Where are they in the tavern?, Then we can begin with our story..."
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Event - Question 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/events/postFull?prompt=Where would we find you in the tavern at this time| Consider your current setting.&isCard=false&options=The Bar, The Dining Area, The Library, My Room&results=Search the Lesser Loot pile for a card titled; ''Tankard'' and put it in your equip slot. Is there another player|, Search the Lesser Loot pile for a card titled; ''Knife'' and put it in your equip slot. Is there another player|, Search the Lesser Loot pile for a card titled; ''Tome of Bludgeoning'' and put it in your equip slot. Is there another player|, Search the Lesser Loot pile for a card titled; ''Bucket'' and put it in your equip slot. Is there another player|",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events",
+								"postFull"
+							],
+							"query": [
+								{
+									"key": "prompt",
+									"value": "Where would we find you in the tavern at this time| Consider your current setting."
+								},
+								{
+									"key": "isCard",
+									"value": "false"
+								},
+								{
+									"key": "options",
+									"value": "The Bar, The Dining Area, The Library, My Room"
+								},
+								{
+									"key": "results",
+									"value": "Search the Lesser Loot pile for a card titled; ''Tankard'' and put it in your equip slot. Is there another player|, Search the Lesser Loot pile for a card titled; ''Knife'' and put it in your equip slot. Is there another player|, Search the Lesser Loot pile for a card titled; ''Tome of Bludgeoning'' and put it in your equip slot. Is there another player|, Search the Lesser Loot pile for a card titled; ''Bucket'' and put it in your equip slot. Is there another player|"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://groceriesbyrecipe.ddns.net:8393",
+			"type": "string"
+		}
+	]
+}
