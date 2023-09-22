@@ -15,56 +15,15 @@ public class Player {
   private List<Item> inventory;
   private Game game;
   private int room;
+  private int position;
+  private int skipCounter;
 
   public Player() {
+    position = 1;
   }
 
   public Player(int room) {
-    this.room = room;
-  }
-
-  public Player(String username) {
-    this.username = username;
-  }
-
-  public Player(String username, int room) {
-    this(username);
-    this.room = room;
-  }
-
-  public Player(String username, Item... inventory) {
-    this(username);
-    this.inventory = new ArrayList<>(Arrays.asList(inventory));
-    for (Item item: this.inventory) {
-      if (equip(item)) {
-        break;
-      }
-    }
-  }
-
-  public Player(String username, int room, Item... inventory) {
-    this(username, inventory);
-    this.room = room;
-  }
-
-  public Player(String username, Item equipped, List<Item> inventory) {
-    this(username);
-    this.equipped = equipped;
-    this.inventory = inventory;
-  }
-
-  public Player(String username, int room, Item equipped, List<Item> inventory) {
-    this(username, equipped, inventory);
-    this.room = room;
-  }
-
-  public Player(String username, Game game, Item equipped, List<Item> inventory) {
-    this(username, equipped, inventory);
-    this.game = game;
-  }
-
-  public Player(String username, int room, Game game, Item equipped, List<Item> inventory) {
-    this(username, game, equipped, inventory);
+    this();
     this.room = room;
   }
 
@@ -89,7 +48,7 @@ public class Player {
    */
   public void addTo(List<Player> playerList) {
     playerList.add(this);
-    playerId = (long) playerList.indexOf(this);
+    this.playerId = (long) playerList.indexOf(this);
   }
 
   /**
@@ -98,7 +57,6 @@ public class Player {
    */
   public void addTo(Game game) {
     game.addPlayer(this);
-    this.game = game;
   }
 
   public Long getPlayerId() {
@@ -149,6 +107,28 @@ public class Player {
     this.room = room;
   }
 
+  public int getPosition() {
+    return position;
+  }
+
+  public void setPosition(int position) {
+    if (position > 20) {
+      position = 20;
+    }
+    if (position < 1) {
+      position = 1;
+    }
+    this.position = position;
+  }
+
+  public int getSkipCounter() {
+    return skipCounter;
+  }
+
+  public void setSkipCounter(int skipCounter) {
+    this.skipCounter = skipCounter;
+  }
+
   @Override
   public String toString() {
     return "Player{" +
@@ -158,6 +138,8 @@ public class Player {
         ", inventory=" + inventory +
         ", game=" + game +
         ", room=" + room +
+        ", position=" + position +
+        ", skipCounter=" + skipCounter +
         '}';
   }
 }
