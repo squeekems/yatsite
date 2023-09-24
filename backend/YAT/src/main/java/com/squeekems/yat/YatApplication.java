@@ -7,9 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
-@EnableAutoConfiguration
 @Configuration
-@ComponentScan
 public class YatApplication {
 
 	public static void main(String[] args) {
