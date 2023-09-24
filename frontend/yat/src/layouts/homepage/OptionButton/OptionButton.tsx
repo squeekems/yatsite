@@ -1,14 +1,10 @@
 import OptionModel from "../../../models/OptionModel"
 import "./OptionButton.css"
 
-export const OptionButton = (
-  props: {
-    optionModel: OptionModel, 
-    optionButtonClickHandler: Function
-  }) => {
+export const OptionButton = (props: {optionModel: OptionModel, optionButtonClickHandler: Function}) => {
 
   const optionButtonClickHandler = () => {
-    props.optionButtonClickHandler(props.optionModel.label);
+    props.optionButtonClickHandler(props.optionModel);
   }
 
   return (

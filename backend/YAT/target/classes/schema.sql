@@ -8,9 +8,7 @@ CREATE TABLE events (
 CREATE TABLE options (
   option_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   label CHARACTER LARGE OBJECT DEFAULT NULL,
-  event_id INT DEFAULT NULL,
-
-  FOREIGN KEY (event_id) REFERENCES events (event_id)
+  result_id INT DEFAULT NULL
 );
 
 CREATE TABLE event_options (

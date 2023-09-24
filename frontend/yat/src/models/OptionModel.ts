@@ -1,14 +1,12 @@
-import EventModel from "./EventModel";
-
 class OptionModel {
   optionId: number;
   label: string;
-  result: EventModel;
+  resultId: number;
 
-  constructor(optionId: number, label: string, result: EventModel) {
+  constructor(optionId: number, label: string, result: number) {
     this.optionId = optionId;
     this.label = label;
-    this.result = result;
+    this.resultId = result;
   }
 }
 export default OptionModel;
