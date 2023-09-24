@@ -10,7 +10,7 @@ export const EventCardsPage = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const baseUrl: string = 'http://localhost:8080/api/events';
+      const baseUrl: string = 'http://groceriesbyrecipe.ddns.net:8393/api/events';
       const url: string = `${baseUrl}?page=0&size=9`;
       const response = await fetch(url);
 

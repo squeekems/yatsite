@@ -5,6 +5,10 @@ import java.util.Random;
 
 public class Constants {
   public static final Long event1Id = 309L;
+  public static final String fSaving = "Saving \"%s\"";
+  public static final String fDeleting = "Deleting \"%s\"";
+  public static final String fGettingWithId = "Getting %s with id: %s";
+  public static final String fFindingAll = "Finding all %s";
   public static final String youAreInATavern =
       "Where would we find you in the tavern at this time? Consider your current setting.";
   public static final String whatIsYourName  = "What is your name traveler?";
