@@ -78,8 +78,8 @@ public class BeautifulBean {
     }
 
     rollItemFootage();
-    dedupResults();
-    dedupOptions();
+//    dedupResults();
+//    dedupOptions();
   }
 
   public Event saveNewResult(String results) {

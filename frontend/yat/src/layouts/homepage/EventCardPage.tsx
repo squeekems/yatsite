@@ -60,7 +60,8 @@ export const EventCardPage = () => {
 
   useEffect(() => {
     const fetchEvent = async () => {
-      const baseUrl: string = 'http://groceriesbyrecipe.ddns.net:8393/events/get?id=';
+      // const baseUrl: string = 'http://groceriesbyrecipe.ddns.net:8393/events/get?id=';
+      const baseUrl: string = 'http://localhost:8080/events/get?id=';
       const eventId: number = 309;
       const url: string = `${baseUrl}${eventId}`;
       const response = await fetch(url);
