@@ -51,7 +51,7 @@ public class OptionController {
   @RequestMapping("/setResult")
   public void setResult(@RequestParam("id") Long id, @RequestParam("resultId") Long resultId) {
     Option option = optionService.getOptionById(id);
-    Event result = eventService.getEventById(resultId);
+    Event result = eventService.getById(resultId);
     option.setResult(result);
     optionService.save(option);
   }

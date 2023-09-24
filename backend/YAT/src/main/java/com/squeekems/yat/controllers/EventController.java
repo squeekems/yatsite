@@ -76,13 +76,13 @@ public class EventController {
   @CrossOrigin(origins = "http://localhost:3000")
   @GetMapping("/get")
   public Event getEvent(@RequestParam Long id){
-    return eventService.getEventById(id);
+    return eventService.getById(id);
   }
 
   @RequestMapping("/addOption")
   public void addOption(@RequestParam("id") Long id,
                         @RequestParam("optionId") Long optionId) {
-    Event event = eventService.getEventById(id);
+    Event event = eventService.getById(id);
     Option option = optionService.getOptionById(optionId);
     event.getOptions().add(option);
     eventService.save(event);
@@ -91,7 +91,7 @@ public class EventController {
   @RequestMapping("/addOptionString")
   public void addOptionString(@RequestParam("id") Long id,
                         @RequestParam("option") String option) {
-    Event event = eventService.getEventById(id);
+    Event event = eventService.getById(id);
     Option newOption = new Option(option);
     event.getOptions().add(newOption);
     optionService.save(newOption);
@@ -102,7 +102,7 @@ public class EventController {
   public void addOptionStrings(@RequestParam("id") Long id,
                         @RequestParam("option") String option,
                         @RequestParam("result") String result) {
-    Event event = eventService.getEventById(id);
+    Event event = eventService.getById(id);
     Option newOption = new Option(option, result);
     event.getOptions().add(newOption);
     eventService.save(newOption.getResult());
@@ -150,7 +150,7 @@ public class EventController {
   @RequestMapping("/removeOption")
   public void removeOption(@RequestParam("id") Long id,
                            @RequestParam("optionId") Long optionId) {
-    Event event = eventService.getEventById(id);
+    Event event = eventService.getById(id);
     Option option = optionService.getOptionById(optionId);
     event.getOptions().remove(option);
     eventService.save(event);
@@ -158,10 +158,10 @@ public class EventController {
 
 //  @RequestMapping("/random")
 //  public Event getRandom() {
-//    Event rndEvent = eventService.getEventById(new Random().nextLong(eventService.findAll().size()));
+//    Event rndEvent = eventService.getById(new Random().nextLong(eventService.findAll().size()));
 //
 //    while (!rndEvent.isCard()) {
-//      rndEvent = eventService.getEventById(new Random().nextLong(eventService.findAll().size()));
+//      rndEvent = eventService.getById(new Random().nextLong(eventService.findAll().size()));
 //    }
 //    return rndEvent;
 //  }

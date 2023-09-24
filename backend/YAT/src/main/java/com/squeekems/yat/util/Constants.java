@@ -4,11 +4,26 @@ import java.util.List;
 import java.util.Random;
 
 public class Constants {
-
+  public static final Long event1Id = 309L;
+  public static final String fSaving = "Saving \"%s\"";
+  public static final String fDeleting = "Deleting \"%s\"";
+  public static final String fGettingWithId = "Getting %s with id: %s";
+  public static final String fFindingAll = "Finding all %s";
+  public static final String youAreInATavern =
+      "Where would we find you in the tavern at this time? Consider your current setting.";
+  public static final String whatIsYourName  = "What is your name traveler?";
+  public static final String fWelcomeToTavern = "Welcome to the tavern, %s.";
+  public static final String fOption = "%d) %s";
+  public static final String optionContinue = "Continue...";
+  public static final String skipQueue = "Skip your next turn.";
+  public static final String moveQueue = "move your progress tracker ";
+  public static final String moveUpQueue = moveQueue + "up by ";
+  public static final String moveDownQueue = moveQueue + "down by ";
+  public static final String fMoveSingular = "%s moved %s by %d space from %d to %d.";
+  public static final String fMovePlural = "%s moved %s by %d spaces from %d to %d.";
   public static final String[] intro = {
       "You are there, in the room of your choice, relaxing."
   };
-
   public static final String[][] roomIntro = {
       {
         "There is the usual chatter of patrons enjoying conversation at the bar.",
@@ -28,48 +43,37 @@ public class Constants {
           "Weary travelers rest in cozy rooms."
       }
   };
-
   public static final String[] barToDiningTransition = {
       "A wooden platter, full of tasty drinks, is carried in one hand."
   };
-
   public static final String[] barToLibraryTransition = {
       "Despite the loud roar, the library is a pleasant place."
   };
-
   public static final String[] barToRoomTransition = {
-      "The less social patrons to this tavern enjoy the stay too"
+      "The less social patrons to this tavern enjoy the stay too."
   };
-
   public static final String[] barToConclusionTransition = {
       "This awesome atmosphere is destined to be interrupted."
   };
-
   public static final String[] diningToLibraryTransition = {
       "The sizzling of food could not be heard from the library however."
   };
-
   public static final String[] diningToRoomTransition = {
       "And after enjoying their meal, patrons may retire deeper into the tavern."
   };
-
   public static final String[] diningToConclusionTransition = {
       "Hopefully they did not eat too much."
   };
-
   public static final String[] libraryToRoomTransition = {
       "The smell a good book in their hands puts their mind at ease."
   };
-
   public static final String[] libraryToConclusionTransition = {
       "The books shake on the shelves."
   };
-
   public static final String[] roomToConclusionTransition = {
       "One can only imagine a peaceful slumber is enjoyed by them. That slumber is to be interrupted, however.",
       "This tavern has some way of making even the maddest person feel at ease, but the madness cannot be held at bay forever."
   };
-
   public static final String[][] introRoomTransition = {
       barToDiningTransition,          // 0 bar
       barToLibraryTransition,         // 1 bar
@@ -82,12 +86,15 @@ public class Constants {
       libraryToConclusionTransition,  // 8 library
       roomToConclusionTransition      // 9 room
   };
-
   public static final String[] introConclusion = {
       "There is a sudden explosion heard from outside."
   };
-
-  public static final String[] fortune = {
+  public static final String[] buildings = {
+      "tavern", "farmstead", "butchery", "jail", "lumber mill", "fletcher", "gypsy cottage",
+      "blacksmith", "barber", "greenhouse", "apothecary", "charm chamber", "barracks", "bakery",
+      "library", "cobbler", "tailor", "bathhouse", "church", "town hall"
+  };
+  public static final String[] fortunes = {
       "She says, \"It will be heroic, but I see a fiery demise for you.\"",
       "She smiles and says, \"Your quick wits will get you out of a tough situation.\"",
       "She raises an inquisitive eyebrow and says, \"Your love of music will be an important part of your life?\"",
