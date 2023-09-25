@@ -3,11 +3,11 @@ package com.squeekems.yat.services;
 import com.squeekems.yat.entities.Sentence;
 import com.squeekems.yat.repositories.SentenceRepository;
 import com.squeekems.yat.util.Constants;
-import com.squeekems.yat.util.SentenceFlag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class SentenceService {
@@ -17,10 +17,6 @@ public class SentenceService {
   public List<Sentence> findAll() {
     System.out.printf(Constants.fFindingAll + "%n", "sentences");
     return sentenceRepository.findAll();
-  }
-
-  public List<SentenceFlag> findUniqueFlags() {
-    return sentenceRepository.findUniqueFlags();
   }
 
   public List<Sentence> findAllByFlag(String flag) {

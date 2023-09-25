@@ -36,7 +36,7 @@
 //      }
 //      List<Integer> rooms = new ArrayList<>(setRooms);
 //      rooms.add(99);
-//      Event introduction = new Event(Constants.getIntroduction(rooms));
+//      Event introduction = new Event(Constants.getIntro(rooms));
 //      soutEvent(introduction);
 //      discardCurrentEventCard();
 //      while (game.getDragonHitPoints() > 0 && game.getBuildings().size() > 0) {

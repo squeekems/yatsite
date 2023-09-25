@@ -22,7 +22,7 @@ public class Constants {
   public static final String fMoveSingular = "%s moved %s by %d space from %d to %d.";
   public static final String fMovePlural = "%s moved %s by %d spaces from %d to %d.";
 
-//  public static String getIntroduction(List<Integer> rooms) {
+//  public static String getIntro(List<Integer> rooms) {
 //    StringBuilder s = new StringBuilder();
 //
 //    s.append(getRandomFrom(intro)).append(" ");
