@@ -4,10 +4,7 @@ import com.squeekems.yat.entities.Sentence;
 import com.squeekems.yat.services.SentenceService;
 import com.squeekems.yat.util.IntroBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Random;
@@ -30,6 +27,7 @@ public class SentenceController {
     return sentenceService.findAllByFlag(flag);
   }
 
+  @CrossOrigin(origins = "http://localhost:3000")
   @RequestMapping("/intro")
   public String getIntro() {
     return introBuilder.getIntro();
