@@ -18,10 +18,9 @@ CREATE TABLE event_options (
   FOREIGN KEY (event_id) REFERENCES events (event_id),
   FOREIGN KEY (option_id) REFERENCES options (option_id)
 );
---ALTER TABLE event_options DROP event_id;
 ALTER TABLE event_options ADD PRIMARY KEY (event_id, option_id);
 
-CREATE TABLE players (
+CREATE TABLE IF NOT EXISTS players (
   player_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   position INT DEFAULT NULL,
   room INT DEFAULT NULL,
@@ -29,7 +28,7 @@ CREATE TABLE players (
   username CHARACTER LARGE OBJECT DEFAULT NULL
 );
 
-CREATE TABLE sentences (
+CREATE TABLE IF NOT EXISTS sentences (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     room_sentence CHARACTER LARGE OBJECT DEFAULT NULL,
     flag CHARACTER LARGE OBJECT DEFAULT NULL

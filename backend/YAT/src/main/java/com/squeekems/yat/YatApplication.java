@@ -1,5 +1,7 @@
 package com.squeekems.yat;
 
+import com.squeekems.yat.controllers.EventController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -2,11 +2,19 @@ package com.squeekems.yat.controllers;
 
 import com.squeekems.yat.entities.Event;
 import com.squeekems.yat.entities.Option;
+import com.squeekems.yat.entities.Player;
 import com.squeekems.yat.services.EventService;
 import com.squeekems.yat.services.OptionService;
+import com.squeekems.yat.services.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.*;
 
 @RestController
@@ -24,13 +32,6 @@ public class EventController {
     return eventService.findAll();
   }
 
-  @RequestMapping("/random")
-  public Event getRandom() {
-    List<Event> cards = getCards();
-
-    return cards.get(new Random().nextInt(cards.size()));
-  }
-
   @GetMapping("/results")
   public List<Event> getResults() {
     List<Event> results = new ArrayList<>();
@@ -43,20 +44,6 @@ public class EventController {
 
     System.out.println("Number of results: " + results.size());
     return results;
-  }
-
-  @GetMapping("/cards")
-  public List<Event> getCards() {
-    List<Event> cards = new ArrayList<>();
-
-    for (Event event: eventService.findAll()) {
-      if (event.isCard()) {
-        cards.add(event);
-      }
-    }
-
-    System.out.println("Number of cards: " + cards.size());
-    return cards;
   }
 
   @GetMapping("/dsCards")
@@ -101,5 +88,10 @@ public class EventController {
     Option option = optionService.getOptionById(optionId);
     event.getOptions().remove(option);
     eventService.save(event);
+  }
+
+  @RequestMapping("/delete")
+  public void deleteById(@RequestParam("id")Long id) {
+    eventService.deleteById(id);
   }
 }

@@ -1,6 +1,5 @@
 package com.squeekems.yat.controllers;
 
-import com.squeekems.yat.entities.Event;
 import com.squeekems.yat.entities.Player;
 import com.squeekems.yat.services.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
