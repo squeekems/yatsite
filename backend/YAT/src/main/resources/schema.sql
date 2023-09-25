@@ -18,7 +18,6 @@ CREATE TABLE event_options (
   FOREIGN KEY (event_id) REFERENCES events (event_id),
   FOREIGN KEY (option_id) REFERENCES options (option_id)
 );
---ALTER TABLE event_options DROP event_id;
 ALTER TABLE event_options ADD PRIMARY KEY (event_id, option_id);
 
 CREATE TABLE players (
