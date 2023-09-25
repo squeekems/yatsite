@@ -19,7 +19,7 @@ export const HomePage = () => {
   const [httpError, setHttpError] = useState(null);
 
   useEffect(() => {
-    // startGame();
+    startGame();
     fetchData();
     setIsLoading(false);
     setDisplayUsernameInput(false);
@@ -39,16 +39,16 @@ export const HomePage = () => {
     }
   }
 
-  /*const startGame = async (): Promise<void> => {
+  const startGame = async (): Promise<void> => {
     try {
-      const url: string = `http://localhost:8080/events/start`;
+      const url: string = `http://localhost:8080/game/start`;
       console.log('url', url)
       const response = await fetch(url);
-      setEvent(await processData(response))
+      console.log(response)
     } catch (error) {
-      console.log(`Failed to fetch from database`, error);
+      console.log(`Failed to start game`, error);
     }
-  }*/
+  }
 
   const processData = async (responseData: Response): Promise<EventModel> => {
     if (!responseData.ok) {
