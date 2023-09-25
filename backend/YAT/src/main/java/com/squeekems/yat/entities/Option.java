@@ -10,11 +10,9 @@ public class Option {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long optionId;
-  /**
-   * Example: "I try to escape."
-   */
   @Column
   private String label;
+  @Column
   private Long resultId;
 
   public Option() {}
