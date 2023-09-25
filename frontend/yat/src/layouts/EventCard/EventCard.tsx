@@ -1,7 +1,7 @@
 import { useState } from "react";
 import EventModel from "../../models/EventModel";
 import OptionModel from "../../models/OptionModel"
-import { OptionButton } from "./OptionButton/OptionButton"
+import { OptionButton } from "../OptionButton/OptionButton"
 import "./EventCard.css";
 import ReactDOM, { render } from "react-dom";
 
@@ -74,13 +74,13 @@ export const EventCard = (props: {event: EventModel, setEvent: Function}) => {
           </div>
           <div className="d-flex justify-content-around">
             <div className='button-container d-flex flex-column'>
-              {props.event.options.map((optionModel: OptionModel) => (
+              {/*props.event.options.map((optionModel: OptionModel) => (
                 <OptionButton
                   key={optionModel.optionId}
                   optionModel={optionModel}
                   optionButtonClickHandler={optionButtonClickHandler}
                 />
-              ))}
+              ))*/}
             </div>
           </div>
         </div>
