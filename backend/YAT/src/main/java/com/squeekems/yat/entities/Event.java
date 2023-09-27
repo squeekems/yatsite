@@ -1,11 +1,10 @@
 package com.squeekems.yat.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.squeekems.yat.util.Constants;
 import jakarta.persistence.*;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "events")
@@ -35,17 +34,20 @@ public class Event {
     this.prompt = prompt;
   }
 
-  public Event(String prompt, String dsPrompt, boolean isCard, Set<Option> options) {
-    this.prompt = prompt;
+  public Event(String prompt, String dsPrompt) {
+    this(prompt);
     this.dsPrompt = dsPrompt;
+  }
+
+  public Event(String prompt, boolean isCard, Set<Option> options) {
+    this(prompt);
     this.isCard = isCard;
     this.options = options;
   }
 
-  public Event(String prompt, boolean isCard, Set<Option> options) {
-    this.prompt = prompt;
-    this.isCard = isCard;
-    this.options = options;
+  public Event(String prompt, String dsPrompt, boolean isCard, Set<Option> options) {
+    this(prompt, isCard, options);
+    this.dsPrompt = dsPrompt;
   }
 
   public Long getEventId() {

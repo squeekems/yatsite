@@ -6,16 +6,24 @@ Try to follow gitflow. We know there is not much organization going on, but we c
 
 # Things That Need Doing
 Todo:
-- Update calls to hit exposed endpoint
-  - Maybe make a dedicated spring project for API?
-- create postman collection to his exposed endpoints
+- update postman collection
 - Make unit tests?
-- Create new CSV files based on DB
-  - Create logic for loading new CSV files into the DB
 
 # News
 ## News - 9/11/23
 Jack is ignoring feature branching because he is an idiot and the project is still early in development. Please let him know if you have stuff you want to start working on before working on it. That way we avoid conflicts. :D
+## News - 9/25/23
+### Jack's focus updated from this:
+I am trying to focus on getting the tabletop game playable. Using the `Game` class under the `util/runtime` directory, I am creating logic to handle the start of the game, event cards, and turns at runtime. I am trying to keep logic in code, and content in the database. To that end, I am creating postman requests for one shots.
 
 # Jack's Current Focus
-I am trying to focus on getting the tabletop game playable. Using the [Game](https://github.com/squeekems/yatsite/blob/main/backend/YAT/src/main/java/com/squeekems/yat/util/runtime/Game.java) class under the [util/runtime](https://github.com/squeekems/yatsite/blob/main/backend/YAT/src/main/java/com/squeekems/yat/util/runtime) directory, I am creating logic to handle the start of the game, event cards, and turns at runtime. I am trying to keep logic in code, and content in the database. To that end, I am creating postman requests for one shots.
+## backend
+- unit tests?
+## frontend 
+- continue intro continue
+- game component
+- player timeout screens
+- playername on cards
+- logic to handle no options on event
+- building destruction events
+- add dragon attacking events when no buildings
