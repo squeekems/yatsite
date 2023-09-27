@@ -28,9 +28,17 @@ public class EventService {
     eventRepository.delete(event);
   }
 
-  public Event getById(Long eventId) {
-    System.out.printf(Constants.fGettingWithId + "%n", "event", eventId);
-    return eventRepository.findById(eventId).orElseThrow();
+  public void deleteById(Long id) {
+    System.out.printf(Constants.fDeleting + "%n", "event(" + id + ")");
+    eventRepository.deleteById(id);
   }
 
+  public Event getById(Long eventId) {
+    System.out.printf(Constants.fGettingWithId + "%n", "event", eventId);
+    return eventRepository.findById(eventId).orElse(new Event("Oopsies"));
+  }
+
+  public void dropTable() {
+    eventRepository.dropTable();
+  }
 }

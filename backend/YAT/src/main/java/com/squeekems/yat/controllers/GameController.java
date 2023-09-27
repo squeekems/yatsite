@@ -1,176 +1,183 @@
 package com.squeekems.yat.controllers;
 
 import com.squeekems.yat.entities.Event;
-import com.squeekems.yat.entities.Game;
-import com.squeekems.yat.entities.Option;
 import com.squeekems.yat.entities.Player;
+import com.squeekems.yat.entities.Sentence;
 import com.squeekems.yat.services.EventService;
-import com.squeekems.yat.services.GameService;
 import com.squeekems.yat.services.PlayerService;
+import com.squeekems.yat.services.SentenceService;
 import com.squeekems.yat.util.Constants;
-import com.squeekems.yat.util.comparators.OptionComparator;
+import com.squeekems.yat.util.IntroBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.ResourceUtils;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.io.File;
+import java.nio.file.Files;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 @RestController
-@RequestMapping("/games")
+@RequestMapping("/game")
 public class GameController {
 
   @Autowired
   EventService eventService;
-
   @Autowired
-  GameService gameService;
-
+  IntroBuilder introBuilder;
   @Autowired
   PlayerService playerService;
+  @Autowired
+  SentenceService sentenceService;
+  private List<Long> eventCards;
+  private List<Long> players;
+  private int playerPointer = 1;
 
-  @RequestMapping("/start")
-  public Long start() {
-    Game game = new Game();
-    gameService.save(game);
-    return game.getGameId();
+  @CrossOrigin(origins = "http://localhost:3000")
+  @GetMapping("/start")
+  public void start() {
+    eventCards = new ArrayList<>();
+
+    for (Event event: eventService.findAll()) {
+      if (event.isCard()) {
+        eventCards.add(event.getEventId());
+      }
+    }
   }
 
-  @RequestMapping("/events/get")
-  public Event getEvent(@RequestParam("id") Long id) {
+  @CrossOrigin(origins = "http://localhost:3000")
+  @RequestMapping("/intro")
+  public String getIntro() {
+    players = new ArrayList<>();
+
+    for (Player player: playerService.findAll()) {
+      players.add(player.getPlayerId());
+    }
+    return introBuilder.getIntro();
+  }
+
+  @CrossOrigin(origins = "http://localhost:3000")
+  @GetMapping("/event")
+  public Event getEvent(@RequestParam Long id) {
     Event event = eventService.getById(id);
-    Set<Option> setOptions = event.getOptions();
-    List<Option> options = null;
-
-    if (setOptions != null && setOptions.size() > 0) {
-      options = new ArrayList<>(setOptions);
-      options.sort(new OptionComparator());
-    } else {
-      options = new ArrayList<>(List.of(new Option(Constants.optionContinue)));
-      event.setOptions(new HashSet<>(options));
-      eventService.save(event);
-    }
-
-    return event;
-  }
-
-  public Event handleWhatIsYourName(@RequestParam("gameId") Long gameId,
-                                    @RequestParam("prompt") String prompt,
-                                    @RequestParam("dsPrompt") String dsPrompt,
-                                    @RequestParam("username") String username) {
-    Game game = gameService.getById(gameId);
-    Player newPlayer = new Player(Integer.parseInt(dsPrompt), username);
-    game.addPlayer(newPlayer);
-    gameService.save(game);
-    checkQueues(prompt, newPlayer);
-
-    return new Event(
-        String.format(Constants.fWelcomeToTavern, username)
-    );
-  }
-
-  public Event handleContinue(@RequestParam("gameId") Long gameId,
-                              @RequestParam("prompt") String prompt,
-                              @RequestParam("dsPrompt") String dsPrompt) {
-    Game game = gameService.getById(gameId);
-    Player player = game.getPlayers().size() > 0 && game.getPlayerPointer() >= 0 &&
-        game.getPlayerPointer() < game.getPlayers().size() ?
-        game.getPlayers().get(game.getPlayerPointer()) : null;
-
-    if (prompt.equals(Constants.whatIsYourName)) {
-      Player newPlayer = new Player(Integer.parseInt(dsPrompt));
-//        console.nextLine();
-//        newPlayer.setUsername(console.nextLine());
-      game.addPlayer(newPlayer);
-      gameService.save(game);
-      checkQueues(prompt, player);
-
-      return new Event(
-          String.format(Constants.fWelcomeToTavern, newPlayer.getUsername())
-      );
-    } else {
-      checkQueues(prompt, player);
-
-      return new Event("We are figuring it out.", false, new HashSet<>(List.of(new Option(Constants.optionContinue))));
-//        System.out.println(String.format(Constants.fOption, 1, Constants.optionContinue));
-//        choice = console.nextInt();
-    }
-  }
-
-  public Event handleChoice(@RequestParam("gameId") Long gameId,
-                            @RequestParam("eventId") Long eventId,
-                            @RequestParam("choice") int choice) {
-    Game game = gameService.getById(gameId);
-    Event event = eventService.getById(eventId);
-    Set<Option> setOptions = event.getOptions();
-    List<Option> options = null;
-    Player player = game.getPlayers().size() > 0 && game.getPlayerPointer() >= 0 &&
-        game.getPlayerPointer() < game.getPlayers().size() ?
-        game.getPlayers().get(game.getPlayerPointer()) : null;
-
-    if (setOptions != null && setOptions.size() > 0) {
-      options = new ArrayList<>(setOptions);
-      options.sort(new OptionComparator());
-    }
-
-    if (options != null) {
-      if (event.getPrompt().equals(Constants.youAreInATavern)) {
-        checkQueues(event.getPrompt(), player);
-
-        return new Event(Constants.whatIsYourName, String.valueOf(choice - 1));
-      }
-
-      checkQueues(event.getPrompt(), player);
-
-      return options.get(choice - 1).getResult();
-    } else {
-      if (event.getPrompt().equals(Constants.whatIsYourName)) {
-        Player newPlayer = new Player(Integer.parseInt(event.getDsPrompt()));
-//        console.nextLine();
-//        newPlayer.setUsername(console.nextLine());
-        game.addPlayer(newPlayer);
-        gameService.save(game);
-        checkQueues(event.getPrompt(), player);
-
-        return new Event(
-            String.format(Constants.fWelcomeToTavern, newPlayer.getUsername())
-        );
-      } else {
-        checkQueues(event.getPrompt(), player);
-
-        return new Event("We are figuring it out.", false, new HashSet<>(List.of(new Option(Constants.optionContinue))));
-//        System.out.println(String.format(Constants.fOption, 1, Constants.optionContinue));
-//        choice = console.nextInt();
-      }
-    }
-  }
-
-  @RequestMapping("/end")
-  public String end(@RequestParam("id") Long id) {
-    try {
-      gameService.delete(id);
-      return String.format(Constants.fDeleting, "game(" + id + ")");
-    } catch (Exception e) {
-      e.printStackTrace();
-      return e.toString();
-    }
-  }
-
-  private void discardCurrentEventCard(Game game) {
-    if (game.getCurrentEvent() != null) {
-      List<Event> discard = new ArrayList<>(game.getDiscard());
-      discard.add(game.getCurrentEvent());
-      game.setDiscard(new HashSet<>(discard));
-      game.setCurrentEvent(null);
-    }
-  }
-
-  private void checkQueues(String prompt, Player player) {
-    if (player != null) {
-      if (prompt.contains(Constants.skipQueue)) {
+    // if this event is a result
+    if (!event.isCard()) {
+      // if "Skip your next turn."
+      if (event.getPrompt().contains(Constants.skipQueue)) {
+        Player player = playerService.getById(players.get(playerPointer));
         player.setSkipCounter(player.getSkipCounter() + 1);
         playerService.save(player);
       }
+    }
+    // if id=115 or "Move the Buildings Remaining Tracker down by 1."
+    if (id == 115L) {
+      Event buildingDestroyed = destroyBuilding();
+      if (buildingDestroyed != null) {
+        event.setPrompt(event.getPrompt() + ' ' + buildingDestroyed.getPrompt());
+      }
+    }
+    return event;
+  }
+
+  @CrossOrigin(origins = "http://localhost:3000")
+  @RequestMapping("/random")
+  public Event getRandom() {
+    int id = new Random().nextInt(eventCards.size());
+    Event event = eventService.getById(eventCards.get(id));
+
+    eventService.delete(event);
+    eventCards.remove(id);
+    if (eventCards.size() == 0) {
+      shuffleDeck();
+    }
+    return event;
+  }
+
+
+  @CrossOrigin(origins = "http://localhost:3000")
+  @RequestMapping("/dragon")
+  public Event getDragon() {
+    return eventService.getById(117L);
+  }
+
+  @CrossOrigin(origins = "http://localhost:3000")
+  @RequestMapping("/increment-turn")
+  public Event incrementPlayerPointer() {
+    playerPointer += 1;
+    if (playerPointer == players.size()) {
+      Event newRound = destroyBuilding();
+
+      if (newRound != null) {
+        playerPointer = -1;
+        return newRound;
+      } else {
+        playerPointer = 0;
+      }
+    }
+
+    Player currentPlayer = playerService.getById(players.get(playerPointer));
+    String player = currentPlayer.getUsername();
+
+    if (currentPlayer.getSkipCounter() == 0) {
+      return new Event(
+          "It is " + player + "'s turn! " + "If you are " + player +
+              ", move your Progress Tracker up by 1 and hit " + Constants.optionContinue + '.'
+      );
+    } else {
+      currentPlayer.setSkipCounter(currentPlayer.getSkipCounter() - 1);
+      playerService.save(currentPlayer);
+      return new Event("You have to skip your turn, " + player + '.');
+    }
+  }
+
+  private Event destroyBuilding() {
+    List<Sentence> buildings = sentenceService.findAllByFlag("building");
+    if (buildings.size() != 0) {
+      Sentence building = buildings.get(new Random().nextInt(buildings.size()));
+      buildings.remove(building);
+      sentenceService.delete(building);
+      if (buildings.size() > 1) {
+        return new Event("The dragon destroyed the " + building.getSentence() +
+            ". There are " + buildings.size() + " buildings remaining."
+        );
+      } else if (buildings.size() == 1) {
+        return new Event("The dragon destroyed the " + building.getSentence() +
+            ". The " + buildings.get(0).getSentence() + " is the only building remaining."
+        );
+      } else {
+        return new Event("The dragon destroyed the " + building.getSentence() +
+            ". With no buildings remaining, the dragon focuses its attention on you!"
+        );
+      }
+    } else {
+      return null;
+    }
+  }
+
+  private void shuffleDeck() {
+    String jDBCDriver = "org.h2.Driver";
+    String dbURL = "jdbc:h2:mem:yatpoc";
+    String username = "sa";
+    String password = "password";
+    Connection con = null;
+    Statement statement = null;
+    try {
+      Class.forName(jDBCDriver);
+      con = DriverManager.getConnection(dbURL, username, password);
+      statement = con.createStatement();
+      File file = ResourceUtils.getFile("classpath:eventReload.sql");
+      System.out.println("filepath=" + file.toPath());
+      String sql = new String(Files.readAllBytes(file.toPath()));
+      statement.executeUpdate(sql);
+      System.out.println("The deed is done.");
+      statement.close();
+      con.close();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
   }
 }

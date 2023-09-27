@@ -19,10 +19,6 @@ public class Player {
   private int position;
   @Column
   private int skipCounter;
-  @ManyToOne
-  @JsonBackReference
-  @JoinColumn(name = "gameId", referencedColumnName = "gameId")
-  private Game game;
 
   public Player() {
     position = 1;
@@ -84,14 +80,6 @@ public class Player {
     this.skipCounter = skipCounter;
   }
 
-  public Game getGame() {
-    return game;
-  }
-
-  public void setGame(Game game) {
-    this.game = game;
-  }
-
   @Override
   public String toString() {
     return "Player{" +
@@ -100,7 +88,6 @@ public class Player {
         ", room=" + room +
         ", position=" + position +
         ", skipCounter=" + skipCounter +
-        ", game=" + game +
         '}';
   }
 }

@@ -1,9 +1,8 @@
 package com.squeekems.yat.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
-import java.util.Comparator;
+import java.util.Objects;
 
 @Entity
 @Table(name = "options")
@@ -11,32 +10,12 @@ public class Option {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long optionId;
-  /**
-   * Example: "I try to escape."
-   */
   @Column
   private String label;
-  @ManyToOne
-  @JsonBackReference
-  @JoinColumn(name = "eventId", referencedColumnName = "eventId")
-  private Event result;
+  @Column
+  private Long resultId;
 
   public Option() {}
-
-  public Option(String label) {
-    this();
-    this.label = label;
-  }
-
-  public Option(String label, Event result) {
-    this(label);
-    this.result = result;
-  }
-
-  public Option(String label, String result) {
-    this(label);
-    this.result = new Event(result);
-  }
 
   public Long getOptionId() {
     return optionId;
@@ -54,12 +33,12 @@ public class Option {
     this.label = label;
   }
 
-  public Event getResult() {
-    return result;
+  public Long getResultId() {
+    return resultId;
   }
 
-  public void setResult(Event result) {
-    this.result = result;
+  public void setResultId(Long resultId) {
+    this.resultId = resultId;
   }
 
   @Override
@@ -69,15 +48,18 @@ public class Option {
 
     Option option = (Option) o;
 
-    if (!label.equals(option.label)) return false;
-    return result.equals(option.result);
+    if (!Objects.equals(optionId, option.optionId))
+      return false;
+    if (!Objects.equals(label, option.label)) return false;
+    return Objects.equals(resultId, option.resultId);
   }
 
   @Override
   public int hashCode() {
-    int result1 = label.hashCode();
-    result1 = 31 * result1 + result.getEventId().hashCode();
-    return result1;
+    int result = optionId != null ? optionId.hashCode() : 0;
+    result = 31 * result + (label != null ? label.hashCode() : 0);
+    result = 31 * result + (this.resultId != null ? this.resultId.hashCode() : 0);
+    return result;
   }
 
   @Override
@@ -85,7 +67,7 @@ public class Option {
     return "Option{" +
         "optionId=" + optionId +
         ", label='" + label + '\'' +
-        ", resultId=" + result.getEventId() +
+        ", resultId=" + resultId +
         '}';
   }
 }
