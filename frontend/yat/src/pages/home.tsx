@@ -30,7 +30,7 @@ export const HomePage = () => {
   // use event number 309 on initial load
   const fetchData = async (eventId: number = 309): Promise<void> => {
     try {
-      const url: string = `http://localhost:8080/events/get?id=${eventId}`;
+      const url: string = `http://localhost:8080/game/event?id=${eventId}`;
       console.log('url', url)
       const response = await fetch(url);
       setEvent(await processData(response))

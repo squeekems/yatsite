@@ -18,7 +18,6 @@ I am trying to focus on getting the tabletop game playable. Using the `Game` cla
 
 # Jack's Current Focus
 ## backend
-- check db for event id of dragon attacking and duplicate with no card boolean
 - unit tests?
 ## frontend 
 - continue intro continue

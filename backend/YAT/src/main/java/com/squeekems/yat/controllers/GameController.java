@@ -10,10 +10,7 @@ import com.squeekems.yat.util.Constants;
 import com.squeekems.yat.util.IntroBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -64,6 +61,29 @@ public class GameController {
   }
 
   @CrossOrigin(origins = "http://localhost:3000")
+  @GetMapping("/event")
+  public Event getEvent(@RequestParam Long id) {
+    Event event = eventService.getById(id);
+    // if this event is a result
+    if (!event.isCard()) {
+      // if "Skip your next turn."
+      if (event.getPrompt().contains(Constants.skipQueue)) {
+        Player player = playerService.getById(players.get(playerPointer));
+        player.setSkipCounter(player.getSkipCounter() + 1);
+        playerService.save(player);
+      }
+    }
+    // if id=115 or "Move the Buildings Remaining Tracker down by 1."
+    if (id == 115L) {
+      Event buildingDestroyed = destroyBuilding();
+      if (buildingDestroyed != null) {
+        event.setPrompt(event.getPrompt() + ' ' + buildingDestroyed.getPrompt());
+      }
+    }
+    return event;
+  }
+
+  @CrossOrigin(origins = "http://localhost:3000")
   @RequestMapping("/random")
   public Event getRandom() {
     int id = new Random().nextInt(eventCards.size());
@@ -77,10 +97,19 @@ public class GameController {
     return event;
   }
 
+
+  @CrossOrigin(origins = "http://localhost:3000")
+  @RequestMapping("/dragon")
+  public Event getDragon() {
+    return eventService.getById(117L);
+  }
+
+  @CrossOrigin(origins = "http://localhost:3000")
+  @RequestMapping("/increment-turn")
   public Event incrementPlayerPointer() {
     playerPointer += 1;
     if (playerPointer == players.size()) {
-      Event newRound = incrementRound();
+      Event newRound = destroyBuilding();
 
       if (newRound != null) {
         playerPointer = -1;
@@ -99,11 +128,13 @@ public class GameController {
               ", move your Progress Tracker up by 1 and hit " + Constants.optionContinue + '.'
       );
     } else {
+      currentPlayer.setSkipCounter(currentPlayer.getSkipCounter() - 1);
+      playerService.save(currentPlayer);
       return new Event("You have to skip your turn, " + player + '.');
     }
   }
 
-  private Event incrementRound() {
+  private Event destroyBuilding() {
     List<Sentence> buildings = sentenceService.findAllByFlag("building");
     if (buildings.size() != 0) {
       Sentence building = buildings.get(new Random().nextInt(buildings.size()));

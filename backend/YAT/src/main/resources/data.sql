@@ -245,6 +245,7 @@ INSERT INTO events (event_id, ds_prompt, is_card, prompt) VALUES (310, NULL, FAL
 INSERT INTO events (event_id, ds_prompt, is_card, prompt) VALUES (311, NULL, FALSE, 'Search the Lesser Loot pile for a card titled, "Knife" and put it in your equip slot. Is there another player?');
 INSERT INTO events (event_id, ds_prompt, is_card, prompt) VALUES (312, NULL, FALSE, 'Search the Lesser Loot pile for a card titled, "Tome of Bludgeoning" and put it in your equip slot. Is there another player?');
 INSERT INTO events (event_id, ds_prompt, is_card, prompt) VALUES (313, NULL, FALSE, 'Search the Lesser Loot pile for a card titled, "Bucket" and put it in your equip slot. Is there another player?');
+INSERT INTO events (event_id, ds_prompt, is_card, prompt) VALUES (314, NULL, TRUE, 'The dragon slams down before you with a rumble. It is ready to attack.');
 
 INSERT INTO `options` (`option_id`, `label`, `result_id`) VALUES (1, 'I attempt to rob the merchant.', 1);
 INSERT INTO `options` (`option_id`, `label`, `result_id`) VALUES (2, 'I offer my coin.', 2);
@@ -748,6 +749,10 @@ INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (312, 251);
 INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (312, 252);
 INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (313, 251);
 INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (313, 252);
+INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (315, 8);
+INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (315, 95);
+INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (315, 96);
+INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (315, 97);
 
 INSERT INTO `sentences` (`sentence`, `flag`) VALUES ('You are there, in the room of your choice, relaxing.', 'intro');
 INSERT INTO `sentences` (`sentence`, `flag`) VALUES ('There is the usual chatter of patrons enjoying conversation at the bar.', 'barSentence');

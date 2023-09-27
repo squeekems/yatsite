@@ -41,5 +41,4 @@ public class EventService {
   public void dropTable() {
     eventRepository.dropTable();
   }
-
 }

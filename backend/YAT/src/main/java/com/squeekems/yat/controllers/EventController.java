@@ -62,7 +62,7 @@ public class EventController {
 
   @CrossOrigin(origins = "http://localhost:3000")
   @GetMapping("/get")
-  public Event getEvent(@RequestParam Long id){
+  public Event getEvent(@RequestParam Long id) {
     return eventService.getById(id);
   }
 
