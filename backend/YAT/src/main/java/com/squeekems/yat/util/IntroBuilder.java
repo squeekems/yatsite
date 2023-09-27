@@ -88,7 +88,7 @@ public class IntroBuilder {
   }
 
   private static String getRFrom(List<Sentence> sentences) {
-    return sentences.get(new Random().nextInt(sentences.size())).getRoomSentence();
+    return sentences.get(new Random().nextInt(sentences.size())).getSentence();
   }
 
   private void flagFinder(StringBuilder s, String flag) {

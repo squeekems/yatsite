@@ -10,7 +10,7 @@ public class Sentence {
   private Long id;
 
   @Column
-  private String roomSentence;
+  private String sentence;
 
   @Column
   private String flag;
@@ -26,12 +26,12 @@ public class Sentence {
     this.id = id;
   }
 
-  public String getRoomSentence() {
-    return roomSentence;
+  public String getSentence() {
+    return sentence;
   }
 
-  public void setRoomSentence(String roomSentence) {
-    this.roomSentence = roomSentence;
+  public void setSentence(String sentence) {
+    this.sentence = sentence;
   }
 
   public String getFlag() {

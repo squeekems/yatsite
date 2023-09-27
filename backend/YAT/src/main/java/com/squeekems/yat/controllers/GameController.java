@@ -2,8 +2,11 @@ package com.squeekems.yat.controllers;
 
 import com.squeekems.yat.entities.Event;
 import com.squeekems.yat.entities.Player;
+import com.squeekems.yat.entities.Sentence;
 import com.squeekems.yat.services.EventService;
 import com.squeekems.yat.services.PlayerService;
+import com.squeekems.yat.services.SentenceService;
+import com.squeekems.yat.util.Constants;
 import com.squeekems.yat.util.IntroBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ResourceUtils;
@@ -31,9 +34,11 @@ public class GameController {
   IntroBuilder introBuilder;
   @Autowired
   PlayerService playerService;
+  @Autowired
+  SentenceService sentenceService;
   private List<Long> eventCards;
   private List<Long> players;
-  private Long playerPointer = 1L;
+  private int playerPointer = 1;
 
   @CrossOrigin(origins = "http://localhost:3000")
   @GetMapping("/start")
@@ -70,6 +75,56 @@ public class GameController {
       shuffleDeck();
     }
     return event;
+  }
+
+  public Event incrementPlayerPointer() {
+    playerPointer += 1;
+    if (playerPointer == players.size()) {
+      Event newRound = incrementRound();
+
+      if (newRound != null) {
+        playerPointer = -1;
+        return newRound;
+      } else {
+        playerPointer = 0;
+      }
+    }
+
+    Player currentPlayer = playerService.getById(players.get(playerPointer));
+    String player = currentPlayer.getUsername();
+
+    if (currentPlayer.getSkipCounter() == 0) {
+      return new Event(
+          "It is " + player + "'s turn! " + "If you are " + player +
+              ", move your Progress Tracker up by 1 and hit " + Constants.optionContinue + '.'
+      );
+    } else {
+      return new Event("You have to skip your turn, " + player + '.');
+    }
+  }
+
+  private Event incrementRound() {
+    List<Sentence> buildings = sentenceService.findAllByFlag("building");
+    if (buildings.size() != 0) {
+      Sentence building = buildings.get(new Random().nextInt(buildings.size()));
+      buildings.remove(building);
+      sentenceService.delete(building);
+      if (buildings.size() > 1) {
+        return new Event("The dragon destroyed the " + building.getSentence() +
+            ". There are " + buildings.size() + " buildings remaining."
+        );
+      } else if (buildings.size() == 1) {
+        return new Event("The dragon destroyed the " + building.getSentence() +
+            ". The " + buildings.get(0).getSentence() + " is the only building remaining."
+        );
+      } else {
+        return new Event("The dragon destroyed the " + building.getSentence() +
+            ". With no buildings remaining, the dragon focuses its attention on you!"
+        );
+      }
+    } else {
+      return null;
+    }
   }
 
   private void shuffleDeck() {
