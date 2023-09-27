@@ -749,10 +749,10 @@ INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (312, 251);
 INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (312, 252);
 INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (313, 251);
 INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (313, 252);
-INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (315, 8);
-INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (315, 95);
-INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (315, 96);
-INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (315, 97);
+INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (314, 8);
+INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (314, 95);
+INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (314, 96);
+INSERT INTO `event_options` (`event_id`, `option_id`) VALUES (314, 97);
 
 INSERT INTO `sentences` (`sentence`, `flag`) VALUES ('You are there, in the room of your choice, relaxing.', 'intro');
 INSERT INTO `sentences` (`sentence`, `flag`) VALUES ('There is the usual chatter of patrons enjoying conversation at the bar.', 'barSentence');
