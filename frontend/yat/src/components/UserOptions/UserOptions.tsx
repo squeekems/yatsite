@@ -25,7 +25,7 @@ export const UserOptions = (
       resetUsername: () => void,
       fetchData: (id: number) => Promise<void>,
       handleContinueBtn: () => void,
-      updateDisplayStates: () => void
+      updateDisplayStates: (gameEvent: EventModel) => void
     }
 ) => {
   const { eventId, options } = gameEvent;
@@ -42,7 +42,7 @@ export const UserOptions = (
         throw new Error('Something went wrong with creating a username');
       }
       console.log('success!', response)
-      updateDisplayStates();
+      updateDisplayStates(gameEvent);
     } catch (error) {
       console.log(`Failed to post to database`, error);
     }
