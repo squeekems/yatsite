@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -41,6 +42,16 @@ class EventServiceTest {
 
   @Test
   void delete() {
+    List<Event> events = new ArrayList<>();
+    events.add(new Event("0"));
+    events.add(new Event("1"));
+    events.add(new Event("2"));
+    events.add(new Event("3"));
+    System.out.println("size=" + events.size());
+    System.out.println(events.get(0));
+    System.out.println(events.get(3));
+    int eventPointer = -1;
+
   }
 
   @Test
