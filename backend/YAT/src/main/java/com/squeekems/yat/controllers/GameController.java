@@ -36,11 +36,13 @@ public class GameController {
   private List<Long> eventCards;
   private List<Long> players;
   private int playerPointer = 1;
+  List<Sentence> buildings;
 
   @CrossOrigin(origins = "http://localhost:3000")
   @GetMapping("/start")
   public void start() {
     eventCards = new ArrayList<>();
+    buildings = sentenceService.findAllByFlag("building");
 
     for (Event event: eventService.findAll()) {
       if (event.isCard()) {
@@ -75,8 +77,10 @@ public class GameController {
     }
     // if id=115 or "Move the Buildings Remaining Tracker down by 1."
     if (id == 115L) {
-      Event buildingDestroyed = destroyBuilding();
-      if (buildingDestroyed != null) {
+      if (buildings.size() == 0) {
+        return eventService.getById(315L);
+      } else {
+        Event buildingDestroyed = destroyBuilding();
         event.setPrompt(event.getPrompt() + ' ' + buildingDestroyed.getPrompt());
       }
     }
@@ -101,28 +105,36 @@ public class GameController {
   @CrossOrigin(origins = "http://localhost:3000")
   @RequestMapping("/dragon")
   public Event getDragon() {
-    return eventService.getById(117L);
+    return eventService.getById(314L);
   }
 
   @CrossOrigin(origins = "http://localhost:3000")
   @RequestMapping("/increment-turn")
   public Event incrementPlayerPointer() {
     playerPointer += 1;
-    if (playerPointer == players.size()) {
-      Event newRound = destroyBuilding();
-
-      if (newRound != null) {
-        playerPointer = -1;
-        return newRound;
-      } else {
-        playerPointer = 0;
+    if (playerPointer > players.size()) {
+      if (buildings.size() >= 1) {
+        Event buildingDestroyed = destroyBuilding();
       }
+
+      playerPointer = 1;
+
+//      if (buildingDestroyed != null) {
+//        return buildingDestroyed;
+//      }
     }
 
     Player currentPlayer = playerService.getById(players.get(playerPointer));
     String player = currentPlayer.getUsername();
 
     if (currentPlayer.getSkipCounter() == 0) {
+      return new Event(
+          "It is " + player + "'s turn! " + "If you are " + player +
+              ", move your Progress Tracker up by 1 and hit " + Constants.optionContinue + '.'
+      );
+    } else if (currentPlayer.getSkipCounter() < 0) {
+      currentPlayer.setSkipCounter(0);
+      playerService.save(currentPlayer);
       return new Event(
           "It is " + player + "'s turn! " + "If you are " + player +
               ", move your Progress Tracker up by 1 and hit " + Constants.optionContinue + '.'
@@ -134,28 +146,36 @@ public class GameController {
     }
   }
 
+  public void skipPlayer(@RequestParam("id") Long id) {
+    Player player = playerService.getById(id);
+    int skipCounter = player.getSkipCounter();
+    if (skipCounter > 0) {
+      player.setSkipCounter(skipCounter - 1);
+      playerPointer += 1;
+    }
+  }
+
   private Event destroyBuilding() {
-    List<Sentence> buildings = sentenceService.findAllByFlag("building");
+    Sentence building = new Sentence();
     if (buildings.size() != 0) {
-      Sentence building = buildings.get(new Random().nextInt(buildings.size()));
+      building = buildings.get(new Random().nextInt(buildings.size()));
       buildings.remove(building);
       sentenceService.delete(building);
-      if (buildings.size() > 1) {
-        return new Event("The dragon destroyed the " + building.getSentence() +
-            ". There are " + buildings.size() + " buildings remaining."
-        );
-      } else if (buildings.size() == 1) {
-        return new Event("The dragon destroyed the " + building.getSentence() +
-            ". The " + buildings.get(0).getSentence() + " is the only building remaining."
-        );
-      } else {
-        return new Event("The dragon destroyed the " + building.getSentence() +
-            ". With no buildings remaining, the dragon focuses its attention on you!"
-        );
-      }
-    } else {
-      return null;
     }
+    if (buildings.size() > 1) {
+      return new Event("The dragon destroyed the " + building.getSentence() +
+          ". There are " + buildings.size() + " buildings remaining."
+      );
+    } else if (buildings.size() == 1) {
+      return new Event("The dragon destroyed the " + building.getSentence() +
+          ". The " + buildings.get(0).getSentence() + " is the only building remaining."
+      );
+    } else {
+      return new Event("The dragon destroyed the " + building.getSentence() +
+          ". With no buildings remaining, the dragon focuses its attention on you!"
+    );
+  }
+
   }
 
   private void shuffleDeck() {
