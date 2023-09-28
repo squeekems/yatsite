@@ -1,5 +1,7 @@
+import { useState } from "react";
 import EventModel from "../../models/EventModel";
 import OptionModel from "../../models/OptionModel";
+import { ConinueButton } from "../ContinueButton/ContinueButton";
 import { OptionButton } from "../OptionButton/OptionButton";
 
 export const UserOptions = (
@@ -13,7 +15,8 @@ export const UserOptions = (
     resetUsername,
     fetchData,
     handleContinueBtn,
-    updateDisplayStates
+    updateDisplayStates,
+    startGame
   }:
     {
       displayUsernameInput: boolean,
@@ -25,12 +28,15 @@ export const UserOptions = (
       resetUsername: () => void,
       fetchData: (id: number) => Promise<void>,
       handleContinueBtn: () => void,
-      updateDisplayStates: (gameEvent: EventModel) => void
+      updateDisplayStates: (gameEvent: EventModel) => void,
+      startGame: () => void
     }
 ) => {
+
+  const [ readyToStartGame, setReadyToStartGame] = useState(false);
+
   const { eventId, options } = gameEvent;
   const handleSubmit = async (formEvent: React.FormEvent<HTMLFormElement>) => {
-    console.log('EVENT', gameEvent)
     formEvent.preventDefault();
     console.log(formEvent.currentTarget.elements);
     console.log(formEvent.currentTarget.elements[0]);
@@ -48,12 +54,30 @@ export const UserOptions = (
     }
   }
 
-  
+  const handleUserOptionSelection = (resultId: number) => {
+    promptUsername(resultId);
+    noMorePlayers(resultId);
+    fetchData(resultId);
+  }
+
+  const promptUsername = (resultId: number) => {
+    const roomResultIds = [310, 311, 312, 313];
+    if (roomResultIds.some(id => id === resultId)) {
+      showUsernameInput(true);
+      resetUsername();
+    }
+  }
+
+  const noMorePlayers = (resultId: number) => {
+    if (resultId === 307) {
+      setReadyToStartGame(true);
+    }
+  }
 
   return (
     <>
-      {displayUsernameInput && !showGreetTraveler &&
-      // Show username input form
+      {!readyToStartGame && displayUsernameInput &&
+        // Show username input form
         <form onSubmit={handleSubmit}>
           <input type="text" id="username" name="username" value={username}
             onChange={event => updateUsername(event.target.value)}></input>
@@ -61,24 +85,24 @@ export const UserOptions = (
           <button className='btn btn-brown btn-lg m-1' type="submit">Submit</button>
         </form>
       }
-      {!displayUsernameInput && showGreetTraveler &&
-        // Show continue button
-        <button
-          className='btn btn-brown btn-lg m-1'
-          onClick={handleContinueBtn}>Continue
-        </button>
+      {!readyToStartGame && showGreetTraveler &&
+        // Greet player and allow to continue
+        <ConinueButton clickContinueHandler={handleContinueBtn} />
       }
-      {!displayUsernameInput && !showGreetTraveler &&
-        // Show game event options
+      {!readyToStartGame && !displayUsernameInput && !showGreetTraveler &&
+      // Show game event options
         options.map((optionModel: OptionModel) => (
           <OptionButton
             key={optionModel.optionId}
             optionModel={optionModel}
-            displayUsernameInput={showUsernameInput}
-            resetUsername={resetUsername}
-            optionButtonClickHandler={fetchData}
+            optionButtonClickHandler={handleUserOptionSelection}
           />
-      ))}
+        ))
+      }
+      {readyToStartGame &&
+        // No more players to add; show Continue button to start game
+        <ConinueButton clickContinueHandler={startGame}/>
+      }
     </>
   )
 }

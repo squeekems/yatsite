@@ -1,19 +1,19 @@
 import { useState } from 'react';
 
 import EventModel from "../../models/EventModel";
-import OptionModel from "../../models/OptionModel";
-import { OptionButton } from "../OptionButton/OptionButton";
 import { Message } from "../Message/Message";
 import { UserOptions } from '../UserOptions/UserOptions';
 
 export const GameSetup = (
   {
     gameEvent,
-    fetchData
+    fetchData,
+    startGame
   }:
     {
       gameEvent: EventModel,
-      fetchData: (id: number) => Promise<void>
+      fetchData: (id: number) => Promise<void>,
+      startGame: () => void
     }
 ) => {
   const [displayUsernameInput, setDisplayUsernameInput] = useState(false);
@@ -33,7 +33,7 @@ export const GameSetup = (
     setUsername('');
   }
 
-  const handleContinueBtn = () => {
+  const greetPlayer = () => {
     setShowGreetTraveler(false);
   }
 
@@ -65,8 +65,9 @@ export const GameSetup = (
               showUsernameInput={showUsernameInput}
               resetUsername={resetUsername}
               fetchData={fetchData}
-              handleContinueBtn={handleContinueBtn}
+              handleContinueBtn={greetPlayer}
               updateDisplayStates={updateDisplayStates}
+              startGame={startGame}
             />
           </div>
         </div>
