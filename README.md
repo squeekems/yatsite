@@ -5,14 +5,14 @@ Check out the [News](#news)
 Try to follow gitflow. We know there is not much organization going on, but we can kind of see what features we are working on.
 
 # Old Docs
-- [You Are in a Tavern Box Art](https://docs.google.com/document/d/1t64hsDJ6WiO3oIYUGvomHXIhcLPSDecIV8YjTyGsPcg/edit?usp=sharing) - Just the art and title
-- [The Talking Book](https://docs.google.com/document/d/12VaWm4J_caX35TpHljr-HoqEE5zvAIqfKRdgFjO1SqI/edit?usp=sharing) - The original instruction book
-- [You Are in a Tavern](https://docs.google.com/document/d/1pKVyV3zGqGV6091TvOQFXJ15XwxpXRSiNSdScyjGSNo/edit?usp=sharing) - Updated instruction book
-- [YAT Room Sheets](https://docs.google.com/document/d/1FYZqVperLuIDEKf2PohFSO-Rhb6Kg7jmIk13lkKzMO8/edit?usp=sharing) - Descriptions of each room that includes story hints. Intended as flavor, not rules.
-- [The Story of YAT](https://docs.google.com/document/d/13z3lfc2Ltgb9KXARTSRNRz6eLZriASNIwJlATmtEWtw/edit?usp=sharing) - A brief description of story and gameplay
-- [Rules for Writing You Are in a Tavern](https://docs.google.com/document/d/1RHBEsj21cy9l4GcYb3e2E6my67IWgFKI7lzRj6PqCts/edit?usp=sharing) - Arbitrary rules for tackling a greater narrative
-- [Event Card Template](https://docs.google.com/document/d/1MNzGSlnhqMk4UQMEN-msbI9lYVrcLff71nobwEousvI/edit?usp=sharing) - Early concept for helping content creators to contribute
-- [YAiaT Player Board](https://docs.google.com/document/d/1DV8Vpi5Rwy3ImJIhv2f__jY0y_E-5NraZ0hIwS0P4zc/edit?usp=sharing) - Personal player board concept
+- <a href="https://docs.google.com/document/d/1t64hsDJ6WiO3oIYUGvomHXIhcLPSDecIV8YjTyGsPcg/edit?usp=sharing" target="_blank">You Are in a Tavern Box Art</a> - Just the art and title
+- <a href="https://docs.google.com/document/d/12VaWm4J_caX35TpHljr-HoqEE5zvAIqfKRdgFjO1SqI/edit?usp=sharing" target="_blank">The Talking Book</a> - The original instruction book
+- <a href="https://docs.google.com/document/d/1pKVyV3zGqGV6091TvOQFXJ15XwxpXRSiNSdScyjGSNo/edit?usp=sharing" target="_blank">You Are in a Tavern</a> - Updated instruction book
+- <a href="https://docs.google.com/document/d/1FYZqVperLuIDEKf2PohFSO-Rhb6Kg7jmIk13lkKzMO8/edit?usp=sharing" target="_blank">YAT Room Sheets</a> - Descriptions of each room that includes story hints. Intended as flavor, not rules.
+- <a href="https://docs.google.com/document/d/13z3lfc2Ltgb9KXARTSRNRz6eLZriASNIwJlATmtEWtw/edit?usp=sharing" target="_blank">The Story of YAT</a> - A brief description of story and gameplay
+- <a href="https://docs.google.com/document/d/1RHBEsj21cy9l4GcYb3e2E6my67IWgFKI7lzRj6PqCts/edit?usp=sharing" target="_blank">Rules for Writing You Are in a Tavern</a> - Arbitrary rules for tackling a greater narrative
+- <a href="https://docs.google.com/document/d/1MNzGSlnhqMk4UQMEN-msbI9lYVrcLff71nobwEousvI/edit?usp=sharing" target="_blank">Event Card Template</a> - Early concept for helping content creators to contribute
+- <a href="https://docs.google.com/document/d/1DV8Vpi5Rwy3ImJIhv2f__jY0y_E-5NraZ0hIwS0P4zc/edit?usp=sharing" target="_blank">YAiaT Player Board</a> - Personal player board concept
 
 # Things That Need Doing
 Todo:
