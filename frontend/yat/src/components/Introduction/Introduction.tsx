@@ -16,9 +16,6 @@ export const Introduction = (
   const [displayUsernameInput, setDisplayUsernameInput] = useState(false);
   const [showGreetTraveler, setShowGreetTraveler] = useState(false);
   const [username, setUsername] = useState('');
-  setUsername("");
-  setDisplayUsernameInput(false);
-  setShowGreetTraveler(false);
 
   return (
     <>
