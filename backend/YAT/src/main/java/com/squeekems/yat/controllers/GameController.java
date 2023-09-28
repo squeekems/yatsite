@@ -101,7 +101,6 @@ public class GameController {
     return event;
   }
 
-
   @CrossOrigin(origins = "http://localhost:3000")
   @RequestMapping("/dragon")
   public Event getDragon() {
