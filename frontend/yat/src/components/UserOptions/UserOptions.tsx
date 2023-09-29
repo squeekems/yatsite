@@ -16,7 +16,7 @@ export const UserOptions = (
     fetchData,
     handleContinueBtn,
     updateDisplayStates,
-    startGame
+    getIntro
   }:
     {
       displayUsernameInput: boolean,
@@ -29,11 +29,11 @@ export const UserOptions = (
       fetchData: (id: number) => Promise<void>,
       handleContinueBtn: () => void,
       updateDisplayStates: (gameEvent: EventModel) => void,
-      startGame: () => void
+      getIntro: () => void
     }
 ) => {
 
-  const [ readyToStartGame, setReadyToStartGame] = useState(false);
+  const [ readyToGetIntro, setReadyToGetIntro] = useState(false);
 
   const { eventId, options } = gameEvent;
   const handleSubmit = async (formEvent: React.FormEvent<HTMLFormElement>) => {
@@ -70,13 +70,13 @@ export const UserOptions = (
 
   const noMorePlayers = (resultId: number) => {
     if (resultId === 307) {
-      setReadyToStartGame(true);
+      setReadyToGetIntro(true);
     }
   }
 
   return (
     <>
-      {!readyToStartGame && displayUsernameInput &&
+      {!readyToGetIntro && displayUsernameInput &&
         // Show username input form
         <form onSubmit={handleSubmit}>
           <input type="text" id="username" name="username" value={username}
@@ -85,11 +85,11 @@ export const UserOptions = (
           <button className='btn btn-brown btn-lg m-1' type="submit">Submit</button>
         </form>
       }
-      {!readyToStartGame && showGreetTraveler &&
+      {!readyToGetIntro && showGreetTraveler &&
         // Greet player and allow to continue
         <ConinueButton clickContinueHandler={handleContinueBtn} />
       }
-      {!readyToStartGame && !displayUsernameInput && !showGreetTraveler &&
+      {!readyToGetIntro && !displayUsernameInput && !showGreetTraveler &&
       // Show game event options
         options.map((optionModel: OptionModel) => (
           <OptionButton
@@ -99,9 +99,9 @@ export const UserOptions = (
           />
         ))
       }
-      {readyToStartGame &&
+      {readyToGetIntro &&
         // No more players to add; show Continue button to start game
-        <ConinueButton clickContinueHandler={startGame}/>
+        <ConinueButton clickContinueHandler={getIntro}/>
       }
     </>
   )

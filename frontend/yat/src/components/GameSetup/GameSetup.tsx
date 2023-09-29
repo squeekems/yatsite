@@ -8,12 +8,12 @@ export const GameSetup = (
   {
     gameEvent,
     fetchData,
-    startGame
+    getIntro
   }:
     {
       gameEvent: EventModel,
       fetchData: (id: number) => Promise<void>,
-      startGame: () => void
+      getIntro: () => void
     }
 ) => {
   const [displayUsernameInput, setDisplayUsernameInput] = useState(false);
@@ -67,7 +67,7 @@ export const GameSetup = (
               fetchData={fetchData}
               handleContinueBtn={greetPlayer}
               updateDisplayStates={updateDisplayStates}
-              startGame={startGame}
+              getIntro={getIntro}
             />
           </div>
         </div>
