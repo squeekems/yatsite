@@ -17,7 +17,6 @@ export const HomePage = () => {
   const [startGamePlay, setStartGamePlay] = useState(false);
 
   useEffect(() => {
-    getIntro();
     startGame();
     fetchData();
     setIsLoading(false);
@@ -30,18 +29,6 @@ export const HomePage = () => {
       console.log('url', url)
       const response = await fetch(url);
       setEvent(await processData(response))
-    } catch (error) {
-      console.log(`Failed to fetch from database`, error);
-    }
-  }
-
-  const getIntro = async (): Promise<void> => {
-    try {
-      const url: string = `http://localhost:8080/game/intro`;
-      console.log('url', url)
-      const response = await fetch(url);
-      console.log(response)
-      setIntro(await processIntro(response))
     } catch (error) {
       console.log(`Failed to fetch from database`, error);
     }
@@ -71,19 +58,6 @@ export const HomePage = () => {
     return loadedEvent;
   }
 
-  const processIntro = async (responseData: Response): Promise<string> => {
-    if (!responseData.ok) {
-      setHttpError('An error has occurred');
-      throw new Error('Something went wrong!');
-    }
-    const responseJson = await responseData.json();
-
-    const loadedIntro: string = responseJson;
-
-    console.log('loadedIntro', loadedIntro)
-    return loadedIntro;
-  }
-
   const continueToIntro = () => {
     setDisplayGameSetup(false);
     setShowIntro(true);
@@ -104,7 +78,7 @@ export const HomePage = () => {
         <div className='box-div'>
           {/* start up prompts when user loads the game */}
           {displayGameSetup && <GameSetup gameEvent={event} fetchData={fetchData} getIntro={continueToIntro} />}
-          {showIntro && <Introduction gameIntro={intro} startGame={continueToGame} />}
+          {showIntro && <Introduction startGame={continueToGame} />}
           {startGamePlay && <Game></Game>}
         </div>
       </div>
