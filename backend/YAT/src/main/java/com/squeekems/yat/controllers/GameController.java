@@ -112,26 +112,20 @@ public class GameController {
   public Event incrementPlayerPointer() {
     playerPointer += 1;
     if (playerPointer > players.size()) {
+      Event buildingDestroyed = null;
       if (buildings.size() >= 1) {
-        Event buildingDestroyed = destroyBuilding();
+        buildingDestroyed = destroyBuilding();
       }
 
       playerPointer = 1;
 
-//      if (buildingDestroyed != null) {
-//        return buildingDestroyed;
-//      }
+      return buildingDestroyed;
     }
 
     Player currentPlayer = playerService.getById(players.get(playerPointer));
     String player = currentPlayer.getUsername();
 
-    if (currentPlayer.getSkipCounter() == 0) {
-      return new Event(
-          "It is " + player + "'s turn! " + "If you are " + player +
-              ", move your Progress Tracker up by 1 and hit " + Constants.optionContinue + '.'
-      );
-    } else if (currentPlayer.getSkipCounter() < 0) {
+    if (currentPlayer.getSkipCounter() <= 0) {
       currentPlayer.setSkipCounter(0);
       playerService.save(currentPlayer);
       return new Event(
@@ -142,15 +136,6 @@ public class GameController {
       currentPlayer.setSkipCounter(currentPlayer.getSkipCounter() - 1);
       playerService.save(currentPlayer);
       return new Event("You have to skip your turn, " + player + '.');
-    }
-  }
-
-  public void skipPlayer(@RequestParam("id") Long id) {
-    Player player = playerService.getById(id);
-    int skipCounter = player.getSkipCounter();
-    if (skipCounter > 0) {
-      player.setSkipCounter(skipCounter - 1);
-      playerPointer += 1;
     }
   }
 
