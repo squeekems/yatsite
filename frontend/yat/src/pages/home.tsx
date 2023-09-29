@@ -1,17 +1,19 @@
-// import { EventCard } from '../EventCard/EventCard';
 import EventModel from '../models/EventModel';
 import { useEffect, useState } from 'react';
 import { SpinningLoading } from '../util/SpinningLoading';
 import './home.css';
 import { GameSetup } from '../components/GameSetup/GameSetup';
+import { Introduction } from '../components/Introduction/Introduction';
 import { Game } from '../components/Game/Game';
 export const HomePage = () => {
 
   const [event, setEvent] = useState<EventModel>(new EventModel(0, "", false, []));
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState('');
+  const [intro, setIntro] = useState('');
 
   const [displayGameSetup, setDisplayGameSetup] = useState(true);
+  const [showIntro, setShowIntro] = useState(false);
   const [startGamePlay, setStartGamePlay] = useState(false);
 
   useEffect(() => {
@@ -56,8 +58,13 @@ export const HomePage = () => {
     return loadedEvent;
   }
 
-  const continueToGame = () => {
+  const continueToIntro = () => {
     setDisplayGameSetup(false);
+    setShowIntro(true);
+  }
+
+  const continueToGame = () => {
+    setShowIntro(false);
     setStartGamePlay(true);
   }
 
@@ -70,7 +77,8 @@ export const HomePage = () => {
       <div className='main'>
         <div className='box-div'>
           {/* start up prompts when user loads the game */}
-          {displayGameSetup && <GameSetup gameEvent={event} fetchData={fetchData} startGame={continueToGame} />}
+          {displayGameSetup && <GameSetup gameEvent={event} fetchData={fetchData} getIntro={continueToIntro} />}
+          {showIntro && <Introduction startGame={continueToGame} />}
           {startGamePlay && <Game></Game>}
         </div>
       </div>
