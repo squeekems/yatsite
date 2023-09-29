@@ -1,19 +1,15 @@
 export const Message = (
-  { displayUsernameInput, showGreetTraveler, username, prompt }:
     {
-      displayUsernameInput: boolean,
-      showGreetTraveler: boolean,
-      username: string,
-      prompt: string
+      messageText
+    }: {
+      messageText: string
     }
 ) => {
   return (
     <div>
       <h1 className='card-title display-1 mb-5'>You're in a Tavern</h1>
       <h2 className='card-text display-2 mb-5'>
-        {displayUsernameInput && !showGreetTraveler && ('What is your name, Traveler?')}
-        {!displayUsernameInput && showGreetTraveler && (`Welcome to the tavern, ${username}.`)}
-        {!displayUsernameInput && !showGreetTraveler && prompt}
+        {messageText}
       </h2>
     </div>
   )
