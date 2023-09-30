@@ -11,10 +11,6 @@ export const Introduction = (
       startGame: () => void
     }
 ) => {
-  const [displayUsernameInput, setDisplayUsernameInput] = useState(false);
-  const [showGreetTraveler, setShowGreetTraveler] = useState(false);
-  const [username, setUsername] = useState('');
-  const [showIntro, setShowIntro] = useState(false);
   const [httpError, setHttpError] = useState('');
   const [intro, setIntro] = useState('');
 
@@ -39,30 +35,26 @@ export const Introduction = (
       setHttpError('An error has occurred');
       throw new Error('Something went wrong!');
     }
-    const responseText = await responseData.text(); //await responseData.json();
-
+    const responseText = await responseData.text();
     const loadedIntro: string = responseText;
-
     console.log('loadedIntro', loadedIntro)
     return loadedIntro;
   }
 
   return (
     <>
-      <div className='event-card'>
-        <Message
-          displayUsernameInput={displayUsernameInput}
-          showGreetTraveler={showGreetTraveler}
-          username={username}
-          prompt={intro}
-        />
+      {httpError && <p>{httpError}</p>}
 
+      {!httpError && <div className='event-card'>
+        <Message messageText={intro} />
         <div className='d-flex justify-content-around'>
           <div className='button-container d-flex flex-column'>
             <ConinueButton clickContinueHandler={startGame} />
           </div>
         </div>
       </div>
+      }
+
     </>
   )
 }
