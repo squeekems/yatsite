@@ -5,6 +5,7 @@ import './home.css';
 import { GameSetup } from '../components/GameSetup/GameSetup';
 import { Introduction } from '../components/Introduction/Introduction';
 import { Game } from '../components/Game/Game';
+import { Header } from '../components/Header/Header';
 export const HomePage = () => {
 
   const [event, setEvent] = useState<EventModel>(new EventModel(0, "", false, []));
@@ -26,7 +27,7 @@ export const HomePage = () => {
   const fetchData = async (eventId: number = 309): Promise<void> => {
     try {
       const url: string = `http://localhost:8080/game/event?id=${eventId}`;
-      console.log('url', url)
+      console.log('fetch data url', url)
       const response = await fetch(url);
       setEvent(await processData(response))
     } catch (error) {
@@ -37,7 +38,7 @@ export const HomePage = () => {
   const startGame = async (): Promise<void> => {
     try {
       const url: string = `http://localhost:8080/game/start`;
-      console.log('url', url)
+      console.log('start game url', url)
       const response = await fetch(url);
       console.log(response)
     } catch (error) {
@@ -50,7 +51,9 @@ export const HomePage = () => {
       setHttpError('An error has occurred');
       throw new Error('Something went wrong!');
     }
+    console.log(responseData)
     const responseJson = await responseData.json();
+    console.log('responseJson', responseJson)
     const loadedEvent: EventModel = responseJson;
 
     loadedEvent.options.sort((a, b) => a.optionId - b.optionId);
