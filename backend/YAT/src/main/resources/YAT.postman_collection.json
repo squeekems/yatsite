@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "4154b5c6-264f-4753-967e-b6cc4bce52d5",
+		"_postman_id": "2c06e909-2b5c-4cff-989d-39c7c3510440",
 		"name": "YAT",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29479535"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -971,6 +970,25 @@
 									"path": [
 										"game",
 										"random"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "newGame",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/game/newGame",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"game",
+										"newGame"
 									]
 								}
 							},

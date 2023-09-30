@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import EventModel from "../../models/EventModel";
 import { Message } from "../Message/Message";
@@ -16,10 +16,11 @@ export const GameSetup = (
       getIntro: () => void
     }
 ) => {
-  const [displayUsernameInput, setDisplayUsernameInput] = useState(false);
-  const [showGreetTraveler, setShowGreetTraveler] = useState(false);
-  const [username, setUsername] = useState('');
+  const [ displayUsernameInput, setDisplayUsernameInput ] = useState(false);
+  const [ showGreetTraveler, setShowGreetTraveler ] = useState(false);
+  const [ username, setUsername ] = useState('');
 
+  
   const showUsernameInput = (display: boolean) => {
     setDisplayUsernameInput(display);
   }
@@ -43,16 +44,12 @@ export const GameSetup = (
     setShowGreetTraveler(true);
    }
 
-
   return (
     <>
       <div className='event-card'>
-        <Message
-          displayUsernameInput={displayUsernameInput}
-          showGreetTraveler={showGreetTraveler}
-          username={username}
-          prompt={gameEvent.prompt}
-        />
+        {displayUsernameInput && !showGreetTraveler && <Message messageText={`What is your name, Traveler?`} />}
+        {!displayUsernameInput && showGreetTraveler && <Message messageText={`Welcome to the tavern, ${username}`} />}
+        {!displayUsernameInput && !showGreetTraveler && <Message messageText={gameEvent.prompt} />}
 
         <div className='d-flex justify-content-around'>
           <div className='button-container d-flex flex-column'>
