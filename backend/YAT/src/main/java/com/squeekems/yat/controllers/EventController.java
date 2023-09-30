@@ -1,16 +1,17 @@
 package com.squeekems.yat.controllers;
 
+import com.squeekems.yat.entities.utilityEntities.Card;
 import com.squeekems.yat.entities.Event;
 import com.squeekems.yat.entities.Option;
+import com.squeekems.yat.entities.utilityEntities.CardEvent;
+import com.squeekems.yat.entities.utilityEntities.OptionResult;
 import com.squeekems.yat.services.EventService;
 import com.squeekems.yat.services.OptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/events")
@@ -30,33 +31,25 @@ public class EventController {
   @GetMapping("/card")
   public Object getCard(@RequestParam("id") Long id) {
     Event event = eventService.getById(id);
+    CardEvent cardEvent = new CardEvent();
+    cardEvent.setEventId(event.getEventId());
+    cardEvent.setPrompt(event.getPrompt());
+    cardEvent.setDsPrompt(event.getDsPrompt());
     if (event != null && event.isCard()) {
-      Map<Map<String, Map<String, String>>, Map<String, Map<Long, Map<String, Map<Long, String>>>>> motherLode = new HashMap<>();
-      Map<String, String> eventData = new HashMap<>();
-      Map<Long, Map<String, Map<Long, String>>> arrowFunction = new HashMap<>();
-      Map<String, Map<Long, Map<String, Map<Long, String>>>> arrowFunctionWrapper = new HashMap<>();
-      Map<String, Map<String, String>> eventMap = new HashMap<>();
-
-
+      Card card = new Card();
+      List<OptionResult> resultList = new ArrayList<>();
       for (Option option : event.getOptions()) {
-        Map<Long, String> resultData = new HashMap<>();
-        Map<String, Map<Long, String>> results = new HashMap<>();
+        OptionResult optionResult = new OptionResult();
 
-        resultData.put(option.getResultId(), eventService.getById(option.getResultId()).getPrompt());
-        results.put(option.getLabel(), resultData);
-        arrowFunction.put(option.getOptionId(), results);
+        optionResult.setOptionId(option.getOptionId());
+        optionResult.setOptionLabel(option.getLabel());
+        optionResult.setResultId(option.getResultId());
+        optionResult.setResultPrompt(eventService.getById(option.getResultId()).getPrompt());
+        resultList.add(optionResult);
       }
-
-//      arrowFunction.put(optionData, resultData);
-      arrowFunctionWrapper.put("options", arrowFunction);
-      eventData.put("eventId", String.valueOf(event.getEventId()));
-      eventData.put("prompt", event.getPrompt());
-      eventData.put("dsPrompt", event.getDsPrompt());
-      eventMap.put("event", eventData);
-
-      motherLode.put(eventMap, arrowFunctionWrapper);
-
-      return motherLode;
+      card.setCardEvent(cardEvent);
+      card.setOptionResult(resultList);
+      return card;
     } else {
       return "No card found for eventId '" + id + "'";
     }
