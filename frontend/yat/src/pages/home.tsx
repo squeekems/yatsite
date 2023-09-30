@@ -73,6 +73,7 @@ export const HomePage = () => {
 
   return (
     <>
+      <Header />
       {isLoading && <SpinningLoading />}
 
       {httpError && <div className='container m-5'><p>{httpError}</p></div>}

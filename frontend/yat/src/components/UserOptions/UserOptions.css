@@ -1,18 +1,18 @@
 .btn-brown {
-  --bs-btn-color: #CC9544;
-  --bs-btn-bg: #1C0A00;
-  --bs-btn-border-color: #1c0a00;
-  --bs-btn-hover-color: #CC9544;
-  --bs-btn-hover-bg: #2b0300;
-  --bs-btn-hover-border-color: #1a0100;
+  --bs-btn-color: var(--orange);
+  --bs-btn-bg: var(--brown);
+  --bs-btn-border-color: var(--brown);
+  --bs-btn-hover-color: var(--orange);
+  --bs-btn-hover-bg: var(--red);
+  --bs-btn-hover-border-color: var(--dark-brown);
   --bs-btn-focus-shadow-rgb: 49,132,253;
-  --bs-btn-active-color: #CC9544;
-  --bs-btn-active-bg: #1a0100;
-  --bs-btn-active-border-color: #001100;
-  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #CC9544;
-  --bs-btn-disabled-bg: #1C0A00;
-  --bs-btn-disabled-border-color: #1C0A00;
+  --bs-btn-active-color: var(--orange);
+  --bs-btn-active-bg: var(--dark-brown);
+  --bs-btn-active-border-color: var(--active-border-color);
+  --bs-btn-active-shadow: var(--active-shadow);
+  --bs-btn-disabled-color: var(--orange);
+  --bs-btn-disabled-bg: var(--brown);
+  --bs-btn-disabled-border-color: var(--brown);
 }
 /* 1C0A00 BG*/
 /* CC9544 FG*/
