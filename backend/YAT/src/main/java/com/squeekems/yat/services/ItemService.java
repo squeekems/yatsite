@@ -17,11 +17,11 @@ public class ItemService {
     return itemRepository.findAll();
   }
 
-  public void save(Item item) {
-    itemRepository.save(item);
+  public Item save(Item item) {
+    return itemRepository.save(item);
   }
 
-  public Item getItemById(Long itemId) {
+  public Item getById(Long itemId) {
     return itemRepository.findById(itemId).orElseThrow();
   }
 }

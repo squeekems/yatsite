@@ -812,3 +812,10 @@ INSERT INTO `sentences` (`sentence`, `flag`) VALUES ('She says, "Don’t confuse
 INSERT INTO `sentences` (`sentence`, `flag`) VALUES ('She says, "Depart not from the path which fate has you assigned."', 'fortune');
 INSERT INTO `sentences` (`sentence`, `flag`) VALUES ('The woman looks you up and down. She says, "Be careful or you could fall for some tricks today."', 'fortune');
 INSERT INTO `sentences` (`sentence`, `flag`) VALUES ('She mournfully says, "All the troubles you have will pass away very quickly."', 'fortune');
+
+INSERT INTO `items`
+(`item_id`  , `name`        , `damage`  , `type`                    , `effects` , `is_greater`  , `count`   ) VALUES
+(1          , 'Battleaxe'   , 6         , 'Weapon - Blade of War'   , ''        , TRUE          , 2         );
+INSERT INTO `items`
+(`item_id`  , `name`        , `damage`  , `type`                    , `effects` , `is_greater`  , `count`   ) VALUES
+(2          , 'Coin'        , 0         , ''                        , ''        , FALSE         , 3         );

@@ -18,9 +18,9 @@ public class EventService {
     return eventRepository.findAll();
   }
 
-  public void save(Event event) {
+  public Event save(Event event) {
     System.out.printf(Constants.fSaving + "%n", event);
-    eventRepository.save(event);
+    return eventRepository.save(event);
   }
 
   public void delete(Event event) {
