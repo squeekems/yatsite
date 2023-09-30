@@ -157,8 +157,8 @@ public class GameController {
     } else {
       return new Event("The dragon destroyed the " + building.getSentence() +
           ". With no buildings remaining, the dragon focuses its attention on you!"
-    );
-  }
+      );
+    }
 
   }
 
