@@ -12,11 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.transform.Result;
 import java.io.File;
 import java.nio.file.Files;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -136,6 +135,40 @@ public class GameController {
       currentPlayer.setSkipCounter(currentPlayer.getSkipCounter() - 1);
       playerService.save(currentPlayer);
       return new Event("You have to skip your turn, " + player + '.');
+    }
+  }
+
+  @CrossOrigin(origins = "http://localhost:3000")
+  @RequestMapping("/newGame")
+  public void newGame() {
+    String jDBCDriver = "org.h2.Driver";
+    String dbURL = "jdbc:h2:mem:yatpoc";
+    String username = "sa";
+    String password = "password";
+    Connection con = null;
+    Statement statement = null;
+    try {
+      Class.forName(jDBCDriver);
+      con = DriverManager.getConnection(dbURL, username, password);
+      statement = con.createStatement();
+      PreparedStatement setRefIntegrityFalse = con.prepareStatement("SET REFERENTIAL_INTEGRITY FALSE");
+      PreparedStatement setRefIntegrityTrue = con.prepareStatement("SET REFERENTIAL_INTEGRITY TRUE");
+      setRefIntegrityFalse.execute();
+      ResultSet tables = con.createStatement().executeQuery("SHOW TABLES");
+      while (tables.next()){
+        System.out.println(tables.getString(1));
+        statement.execute("DELETE FROM " + tables.getString(1));
+      }
+      setRefIntegrityTrue.execute();
+      File file = ResourceUtils.getFile("classpath:data.sql");
+      System.out.println("filepath=" + file.toPath());
+      String sql = new String(Files.readAllBytes(file.toPath()));
+      statement.executeUpdate(sql);
+      System.out.println("The deed is done.");
+      statement.close();
+      con.close();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
   }
 
