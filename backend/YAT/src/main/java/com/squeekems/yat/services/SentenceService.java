@@ -19,30 +19,30 @@ public class SentenceService {
 
   public List<Sentence> findAll() {
     List<Sentence> sentences = sentenceRepository.findAll();
-    log.info(String.format(Constants.F_FINDING_ALL + "%n", "sentences", sentences.size()));
+    log.info(String.format(Constants.F_FINDING_ALL, "sentences", sentences.size()));
     return sentences;
   }
 
   public List<Sentence> findAllByFlag(String flag) {
     List<Sentence> sentences = sentenceRepository.findAllByFlag(flag);
     log.info(String.format(
-        Constants.F_FINDING_ALL + "%n", flag + " sentences by '" + flag + "'", sentences.size()
+        Constants.F_FINDING_ALL, flag + " sentences by '" + flag + "'", sentences.size()
     ));
     return sentences;
   }
 
   public void save(Sentence sentence) {
-    log.info(String.format(Constants.F_SAVING + "%n", sentence));
+    log.info(String.format(Constants.F_SAVING, sentence));
     sentenceRepository.save(sentence);
   }
 
   public void delete(Sentence sentence) {
-    log.info(String.format(Constants.F_DELETING + "%n", sentence));
+    log.info(String.format(Constants.F_DELETING, sentence));
     sentenceRepository.delete(sentence);
   }
 
   public Sentence getById(Long id) {
-    log.info(String.format(Constants.F_GETTING_WITH_ID + "%n", "sentence", id));
+    log.info(String.format(Constants.F_GETTING_WITH_ID, "sentence", id));
     return sentenceRepository.findById(id).orElseThrow();
   }
 }
