@@ -19,27 +19,28 @@ public class EventService {
   private EventRepository eventRepository;
 
   public List<Event> findAll() {
-    log.info(String.format(Constants.fFindingAll + "%n", "events"));
-    return eventRepository.findAll();
+    List<Event> events = eventRepository.findAll();
+    log.info(String.format(Constants.F_FINDING_ALL + "%n", "events", events.size()));
+    return events;
   }
 
   public Event save(Event event) {
-    log.info(String.format(Constants.fSaving + "%n", event));
+    log.info(String.format(Constants.F_SAVING + "%n", event));
     return eventRepository.save(event);
   }
 
   public void delete(Event event) {
-    log.info(String.format(Constants.fDeleting + "%n", event));
+    log.info(String.format(Constants.F_DELETING + "%n", event));
     eventRepository.delete(event);
   }
 
   public void deleteById(Long id) {
-    log.info(String.format(Constants.fDeleting + "%n", "event(" + id + ")"));
+    log.info(String.format(Constants.F_DELETING + "%n", "event(" + id + ")"));
     eventRepository.deleteById(id);
   }
 
   public Event getById(Long eventId) {
-    log.info(String.format(Constants.fGettingWithId + "%n", "event", eventId));
+    log.info(String.format(Constants.F_GETTING_WITH_ID + "%n", "event", eventId));
     return eventRepository.findById(eventId).orElse(new Event("Oopsies"));
   }
 }

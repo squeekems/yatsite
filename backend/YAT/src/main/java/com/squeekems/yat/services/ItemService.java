@@ -18,17 +18,18 @@ public class ItemService {
   private ItemRepository itemRepository;
 
   public List<Item> findAll() {
-    log.info(String.format(Constants.fFindingAll + "%n", "items"));
-    return itemRepository.findAll();
+    List<Item> items = itemRepository.findAll();
+    log.info(String.format(Constants.F_FINDING_ALL + "%n", "items", items.size()));
+    return items;
   }
 
   public Item save(Item item) {
-    log.info(String.format(Constants.fSaving + "%n", item));
+    log.info(String.format(Constants.F_SAVING + "%n", item));
     return itemRepository.save(item);
   }
 
   public Item getById(Long itemId) {
-    log.info(String.format(Constants.fGettingWithId + "%n", "event", itemId));
+    log.info(String.format(Constants.F_GETTING_WITH_ID + "%n", "event", itemId));
     return itemRepository.findById(itemId).orElseThrow();
   }
 }

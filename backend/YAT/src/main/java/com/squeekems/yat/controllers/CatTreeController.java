@@ -1,6 +1,5 @@
 package com.squeekems.yat.controllers;
 
-import com.squeekems.yat.services.PlayerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +11,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.Map;
+
+import static com.squeekems.yat.util.Constants.*;
 
 @RestController
 @RequestMapping("/editor")
@@ -79,10 +80,6 @@ public class CatTreeController {
   }
 
   public void ourBest(String sql) {
-    String jDBCDriver = "org.h2.Driver";
-    String dbURL = "jdbc:h2:mem:yatpoc";
-    String username = "sa";
-    String password = "password";
     Connection con = null;
     Statement statement = null;
     try {
