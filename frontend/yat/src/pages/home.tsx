@@ -6,20 +6,25 @@ import { GameSetup } from '../components/GameSetup/GameSetup';
 import { Introduction } from '../components/Introduction/Introduction';
 import { Game } from '../components/Game/Game';
 import { Header } from '../components/Header/Header';
+import { useSessionStorage } from '../hooks/useSessionStorage';
+
 export const HomePage = () => {
 
-  const [event, setEvent] = useState<EventModel>(new EventModel(0, "", false, []));
+  const [event, setEvent] =  useSessionStorage('currentEvent', (new EventModel(0, "", false, [])));
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState('');
-  const [intro, setIntro] = useState('');
 
-  const [displayGameSetup, setDisplayGameSetup] = useState(true);
-  const [showIntro, setShowIntro] = useState(false);
-  const [startGamePlay, setStartGamePlay] = useState(false);
-
+  const [displayGameSetup, setDisplayGameSetup] = useSessionStorage('inGameSetUp', true);
+  const [showIntro, setShowIntro] = useSessionStorage('inIntro', false);
+  const [startGamePlay, setStartGamePlay] = useSessionStorage('inGamePlay', false);
+  
   useEffect(() => {
-    startGame();
-    fetchData();
+    let sessionStarted = sessionStorage.getItem('sessionStarted');
+    if (sessionStarted === null) {
+      startGame();
+      fetchData();
+      sessionStorage.setItem('sessionStarted', 'true');
+    }
     setIsLoading(false);
   }, []);
 
@@ -29,7 +34,7 @@ export const HomePage = () => {
       const url: string = `http://localhost:8080/game/event?id=${eventId}`;
       console.log('fetch data url', url)
       const response = await fetch(url);
-      setEvent(await processData(response))
+      setEvent(await processData(response));
     } catch (error) {
       console.log(`Failed to fetch from database`, error);
     }
