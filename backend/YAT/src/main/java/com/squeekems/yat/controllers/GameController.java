@@ -9,6 +9,7 @@ import com.squeekems.yat.services.SentenceService;
 import com.squeekems.yat.util.Constants;
 import com.squeekems.yat.util.IntroBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,8 @@ import java.util.Random;
 @RequestMapping("/game")
 public class GameController {
 
+  @Autowired
+  Environment env;
   @Autowired
   EventService eventService;
   @Autowired
@@ -141,12 +144,13 @@ public class GameController {
   @CrossOrigin(origins = "http://localhost:3000")
   @RequestMapping("/newGame")
   public void newGame() {
-    String jDBCDriver = "org.h2.Driver";
-    String dbURL = "jdbc:h2:mem:yatpoc";
-    String username = "sa";
-    String password = "password";
+    String jDBCDriver = env.getProperty(Constants.jDBCDriver);
+    String dbURL = env.getProperty(Constants.dbURL);
+    String username = env.getProperty(Constants.username);
+    String password = env.getProperty(Constants.password);
     Connection con = null;
     Statement statement = null;
+
     try {
       Class.forName(jDBCDriver);
       con = DriverManager.getConnection(dbURL, username, password);

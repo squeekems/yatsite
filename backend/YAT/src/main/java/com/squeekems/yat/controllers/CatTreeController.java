@@ -1,5 +1,8 @@
 package com.squeekems.yat.controllers;
 
+import com.squeekems.yat.services.PlayerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +16,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/editor")
 public class CatTreeController {
+  Logger log = LoggerFactory.getLogger(CatTreeController.class);
 
   @RequestMapping("/exportDb")
   public void exportDb() {
@@ -71,7 +75,6 @@ public class CatTreeController {
 
     sql.append(");");
 
-    System.out.println(sql);
     ourBest(sql.toString());
   }
 
@@ -87,7 +90,7 @@ public class CatTreeController {
       con = DriverManager.getConnection(dbURL, username, password);
       statement = con.createStatement();
       statement.execute(sql);
-      System.out.println("The deed is done.");
+      log.info("Our Best was '" + sql + "'");
       statement.close();
       con.close();
     } catch (Exception e) {
