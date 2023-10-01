@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useSessionStorage } from '../../hooks/useSessionStorage';
 
 import EventModel from "../../models/EventModel";
 import { Message } from "../Message/Message";
@@ -16,50 +16,31 @@ export const GameSetup = (
       getIntro: () => void
     }
 ) => {
-  const [displayUsernameInput, setDisplayUsernameInput] = useState(false);
-  const [showGreetTraveler, setShowGreetTraveler] = useState(false);
-  const [username, setUsername] = useState('');
-
-  useEffect(() => {
-    const showUsernameInput = sessionStorage.getItem('displayUsernameInput');
-    const showGreeting = sessionStorage.getItem('showGreetingTraveler');
-    const sessionUsername = sessionStorage.getItem('username') || '';
-    console.log('SESSION USERNAME INPUT', showUsernameInput)
-    setDisplayUsernameInput(showUsernameInput === 'true');
-    setShowGreetTraveler(showGreeting === 'true');
-    setUsername(sessionUsername);
-    console.log('DISPLAY USERNAME INPUT', displayUsernameInput);
-    console.log('SHOW GREETING', showGreetTraveler);
-    console.log("USERNAME", username)
-  }, []);
+  const [displayUsernameInput, setDisplayUsernameInput] = useSessionStorage('displayUsernameInput', false);
+  const [showGreetTraveler, setShowGreetTraveler] = useSessionStorage('showGreetTraveler', false);
+  const [username, setUsername] = useSessionStorage('username', '');
 
   const showUsernameInput = (display: boolean) => {
     setDisplayUsernameInput(display);
-    sessionStorage.setItem('displayUsernameInput', `${display}`);
   }
 
 
   const updateUsername = (name: string) => {
     setUsername(name);
-    sessionStorage.setItem('username', name);
   }
 
   const resetUsername = () => {
     setUsername('');
-    sessionStorage.setItem('username', '');
   }
 
   const greetPlayer = () => {
     setShowGreetTraveler(false);
-    sessionStorage.setItem('showGreeting', 'false');
   }
 
   // When user submits username, greet them.
   const updateDisplayStates = () => {
     setDisplayUsernameInput(false);
     setShowGreetTraveler(true);
-    sessionStorage.setItem('displayUsernameInput', 'false');
-    sessionStorage.setItem('showGreeting', 'true');
   }
 
   return (

@@ -9,21 +9,19 @@ import { Header } from '../components/Header/Header';
 import { useSessionStorage } from '../hooks/useSessionStorage';
 
 export const HomePage = () => {
-
+  const [sessionStarted, setSessionStarted] = useSessionStorage('sessionStarted', false);
   const [event, setEvent] =  useSessionStorage('currentEvent', (new EventModel(0, "", false, [])));
+  const [displayGameSetup, setDisplayGameSetup] = useSessionStorage('displayGameSetup', true);
+  const [showIntro, setShowIntro] = useSessionStorage('showIntro', false);
+  const [startGamePlay, setStartGamePlay] = useSessionStorage('startGamePlay', false);
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState('');
 
-  const [displayGameSetup, setDisplayGameSetup] = useSessionStorage('inGameSetUp', true);
-  const [showIntro, setShowIntro] = useSessionStorage('inIntro', false);
-  const [startGamePlay, setStartGamePlay] = useSessionStorage('inGamePlay', false);
-  
   useEffect(() => {
-    let sessionStarted = sessionStorage.getItem('sessionStarted');
-    if (sessionStarted === null) {
+    if (!sessionStarted) {
       startGame();
       fetchData();
-      sessionStorage.setItem('sessionStarted', 'true');
+      setSessionStarted(true);
     }
     setIsLoading(false);
   }, []);
