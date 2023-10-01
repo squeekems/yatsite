@@ -19,17 +19,17 @@ public class ItemService {
 
   public List<Item> findAll() {
     List<Item> items = itemRepository.findAll();
-    log.info(String.format(Constants.F_FINDING_ALL + "%n", "items", items.size()));
+    log.info(String.format(Constants.F_FINDING_ALL, "items", items.size()));
     return items;
   }
 
   public Item save(Item item) {
-    log.info(String.format(Constants.F_SAVING + "%n", item));
+    log.info(String.format(Constants.F_SAVING, item));
     return itemRepository.save(item);
   }
 
   public Item getById(Long itemId) {
-    log.info(String.format(Constants.F_GETTING_WITH_ID + "%n", "event", itemId));
+    log.info(String.format(Constants.F_GETTING_WITH_ID, "event", itemId));
     return itemRepository.findById(itemId).orElseThrow();
   }
 }
