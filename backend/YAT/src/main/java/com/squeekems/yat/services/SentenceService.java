@@ -3,39 +3,42 @@ package com.squeekems.yat.services;
 import com.squeekems.yat.entities.Sentence;
 import com.squeekems.yat.repositories.SentenceRepository;
 import com.squeekems.yat.util.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Random;
 
 @Service
 public class SentenceService {
+  Logger log = LoggerFactory.getLogger(SentenceService.class);
+  
   @Autowired
   private SentenceRepository sentenceRepository;
 
   public List<Sentence> findAll() {
-    System.out.printf(Constants.fFindingAll + "%n", "sentences");
+    log.info(String.format(Constants.fFindingAll + "%n", "sentences"));
     return sentenceRepository.findAll();
   }
 
   public List<Sentence> findAllByFlag(String flag) {
-    System.out.printf(Constants.fFindingAll + "%n", flag + " sentences");
+    log.info(String.format(Constants.fFindingAll + "%n", flag + " sentences"));
     return sentenceRepository.findAllByFlag(flag);
   }
 
   public void save(Sentence sentence) {
-    System.out.printf(Constants.fSaving + "%n", sentence);
+    log.info(String.format(Constants.fSaving + "%n", sentence));
     sentenceRepository.save(sentence);
   }
 
   public void delete(Sentence sentence) {
-    System.out.printf(Constants.fDeleting + "%n", sentence);
+    log.info(String.format(Constants.fDeleting + "%n", sentence));
     sentenceRepository.delete(sentence);
   }
 
   public Sentence getById(Long id) {
-    System.out.printf(Constants.fGettingWithId + "%n", "sentence", id);
+    log.info(String.format(Constants.fGettingWithId + "%n", "sentence", id));
     return sentenceRepository.findById(id).orElseThrow();
   }
 }
