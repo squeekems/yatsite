@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useSessionStorage } from "../../hooks/useSessionStorage";
 import EventModel from "../../models/EventModel";
 import OptionModel from "../../models/OptionModel";
 import { ConinueButton } from "../ContinueButton/ContinueButton";
@@ -33,7 +33,7 @@ export const UserOptions = (
     }
 ) => {
 
-  const [ readyToGetIntro, setReadyToGetIntro] = useState(false);
+  const [ readyToGetIntro, setReadyToGetIntro] = useSessionStorage('readyToGetIntro', false);
 
   const { eventId, options } = gameEvent;
   const handleSubmit = async (formEvent: React.FormEvent<HTMLFormElement>) => {

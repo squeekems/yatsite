@@ -6,27 +6,23 @@ import com.squeekems.yat.entities.Sentence;
 import com.squeekems.yat.services.EventService;
 import com.squeekems.yat.services.PlayerService;
 import com.squeekems.yat.services.SentenceService;
-import com.squeekems.yat.util.Constants;
 import com.squeekems.yat.util.IntroBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.transform.Result;
 import java.io.File;
 import java.nio.file.Files;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import static com.squeekems.yat.util.Constants.*;
 
 @RestController
 @RequestMapping("/game")
 public class GameController {
 
-  @Autowired
-  Environment env;
   @Autowired
   EventService eventService;
   @Autowired
@@ -40,7 +36,7 @@ public class GameController {
   private int playerPointer = 1;
   List<Sentence> buildings;
 
-  @CrossOrigin(origins = "http://localhost:3000")
+  @CrossOrigin(origins = CORS_URL)
   @GetMapping("/start")
   public void start() {
     eventCards = new ArrayList<>();
@@ -53,7 +49,7 @@ public class GameController {
     }
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")
+  @CrossOrigin(origins = CORS_URL)
   @RequestMapping("/intro")
   public String getIntro() {
     players = new ArrayList<>();
@@ -64,14 +60,14 @@ public class GameController {
     return introBuilder.getIntro();
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")
+  @CrossOrigin(origins = CORS_URL)
   @GetMapping("/event")
   public Event getEvent(@RequestParam Long id) {
     Event event = eventService.getById(id);
     // if this event is a result
     if (!event.isCard()) {
       // if "Skip your next turn."
-      if (event.getPrompt().contains(Constants.skipQueue)) {
+      if (event.getPrompt().contains(SKIP_QUEUE)) {
         Player player = playerService.getById(players.get(playerPointer));
         player.setSkipCounter(player.getSkipCounter() + 1);
         playerService.save(player);
@@ -89,7 +85,7 @@ public class GameController {
     return event;
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")
+  @CrossOrigin(origins = CORS_URL)
   @RequestMapping("/random")
   public Event getRandom() {
     int id = new Random().nextInt(eventCards.size());
@@ -103,13 +99,13 @@ public class GameController {
     return event;
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")
+  @CrossOrigin(origins = CORS_URL)
   @RequestMapping("/dragon")
   public Event getDragon() {
     return eventService.getById(314L);
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")
+  @CrossOrigin(origins = CORS_URL)
   @RequestMapping("/increment-turn")
   public Event incrementPlayerPointer() {
     playerPointer += 1;
@@ -132,7 +128,7 @@ public class GameController {
       playerService.save(currentPlayer);
       return new Event(
           "It is " + player + "'s turn! " + "If you are " + player +
-              ", move your Progress Tracker up by 1 and hit " + Constants.optionContinue + '.'
+              ", move your Progress Tracker up by 1 and hit continue..."
       );
     } else {
       currentPlayer.setSkipCounter(currentPlayer.getSkipCounter() - 1);
@@ -141,16 +137,11 @@ public class GameController {
     }
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")
+  @CrossOrigin(origins = CORS_URL)
   @RequestMapping("/newGame")
   public void newGame() {
-    String jDBCDriver = env.getProperty(Constants.jDBCDriver);
-    String dbURL = env.getProperty(Constants.dbURL);
-    String username = env.getProperty(Constants.username);
-    String password = env.getProperty(Constants.password);
     Connection con = null;
     Statement statement = null;
-
     try {
       Class.forName(jDBCDriver);
       con = DriverManager.getConnection(dbURL, username, password);
@@ -200,10 +191,6 @@ public class GameController {
   }
 
   private void shuffleDeck() {
-    String jDBCDriver = "org.h2.Driver";
-    String dbURL = "jdbc:h2:mem:yatpoc";
-    String username = "sa";
-    String password = "password";
     Connection con = null;
     Statement statement = null;
     try {

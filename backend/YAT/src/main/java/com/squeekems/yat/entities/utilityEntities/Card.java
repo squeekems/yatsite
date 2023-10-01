@@ -1,7 +1,5 @@
 package com.squeekems.yat.entities.utilityEntities;
 
-import com.squeekems.yat.entities.Event;
-
 import java.util.List;
 import java.util.Objects;
 

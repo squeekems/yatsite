@@ -1,0 +1,14 @@
+.game-nav {
+  align-items: center;
+  background-color: var(--brown);
+  display: flex;
+  justify-content: space-between;
+  padding: 1em 10em;
+}
+
+.game-nav #current-player-turn {
+  color: var(--orange);
+  font-weight: 600;
+  font-size: 1.1em;
+  margin-bottom: 0;
+}
