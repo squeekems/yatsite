@@ -39,6 +39,14 @@ public class Event {
     this.dsPrompt = dsPrompt;
   }
 
+  public Event(Long eventId, String dsPrompt, boolean isCard, String prompt) {
+    this();
+    this.eventId = eventId;
+    this.prompt = prompt;
+    this.dsPrompt = dsPrompt;
+    this.isCard = isCard;
+  }
+
   public Event(String prompt, boolean isCard, Set<Option> options) {
     this(prompt);
     this.isCard = isCard;

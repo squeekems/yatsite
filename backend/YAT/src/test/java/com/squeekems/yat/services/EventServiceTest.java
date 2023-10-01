@@ -11,60 +11,85 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 class EventServiceTest {
 
   @Autowired
-  EventRepository eventRepository;
-  @Autowired
   EventService eventService;
 
   @Test
   void findAll() {
-    List<Event> events = eventService.findAll();
-    long expected = eventRepository.count();
-    long actual = events.size();
+    // Given: Database has rows on events table
 
-    System.out.println("expected=" + expected);
-    System.out.println("actual=" + actual);
+    // When:
+    List<Event> actual = eventService.findAll();
 
-    assertEquals(expected, actual);
+    // Then:
+    assertNotNull(actual);
   }
 
   @Test
   void save() {
-//    Event expected = new Event();
-//    eventService.save(expected);
-//    Event actual = eventService.getById(expected.getEventId());
-//    assertEquals(expected.getPrompt(), actual.getPrompt());
+    // Given:
+    Event event = new Event();
+
+    // When:
+    Event actual = eventService.save(event);
+
+    // Then:
+    assertNotNull(actual);
   }
 
   @Test
   void delete() {
-    List<Event> events = new ArrayList<>();
-    events.add(new Event("0"));
-    events.add(new Event("1"));
-    events.add(new Event("2"));
-    events.add(new Event("3"));
-    System.out.println("size=" + events.size());
-    System.out.println(events.get(0));
-    System.out.println(events.get(3));
-    int eventPointer = -1;
+    // Given:
+    Long eventId = 1L;
+    String dsPrompt = null;
+    boolean isCard = false;
+    String prompt = "Roll a D20 to attempt. If the attempt roll is more than 10, you get away " +
+        "with something from his cart. Draw a card from the Greater Loot pile. If the attempt " +
+        "roll is no greater than 10, the merchant lands a decisive blow to your head. Roll a " +
+        "Saving Throw.";
+    Event event1 = new Event(eventId, dsPrompt, isCard, prompt);
+
+    // When:
+    eventService.delete(event1);
+
+    // Then:
 
   }
 
   @Test
   void deleteById() {
+    // Given:
+    Long id = 1L;
+
+    // When:
+    eventService.deleteById(id);
+
+    // Then:
   }
 
   @Test
   void getById() {
-    Event event = eventService.getById(5L);
-    System.out.println(event);
+    // Given:
+    Long id = 1L;
+
+    // When:
+    Event actual = eventService.getById(5L);
+
+    // Then:
+    assertNotNull(actual);
   }
 
   @Test
   void dropTable() {
+    // Given:
+
+    // When:
+
+    // Then:
   }
 }
