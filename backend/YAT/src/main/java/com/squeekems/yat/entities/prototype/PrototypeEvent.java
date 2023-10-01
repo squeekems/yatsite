@@ -1,15 +1,14 @@
-package com.squeekems.yat.entities.utilityEntities;
+package com.squeekems.yat.entities.prototype;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.squeekems.yat.entities.Event;
 import com.squeekems.yat.entities.Option;
 import jakarta.persistence.*;
 
 import java.util.*;
 
 @Entity
-@Table(name = "events")
-public class EventPrototype {
+@Table(name = "prototype_events")
+public class PrototypeEvent {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long eventId;
@@ -21,13 +20,9 @@ public class EventPrototype {
   private String dsPrompt;
   @Column
   private boolean isCard;
-  @ElementCollection
-  private Map<String, Boolean> flagMap;
-  @Column
-  private int dieMin;
-  @Column
-  private int dieMax;
-
+  @OneToMany
+  @OrderColumn(name = "index")
+  private List<PrototypeFlag> flagList;
   @ManyToMany(targetEntity = Option.class, fetch = FetchType.EAGER)
   @JsonManagedReference
   @JoinTable( name = "event_options", joinColumns = { @JoinColumn(name = "event_id") },

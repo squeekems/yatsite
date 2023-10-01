@@ -73,7 +73,7 @@ public class EventController {
       }
     }
 
-    log.info(String.format(Constants.F_FINDING_ALL + "%n", "cards", cards.size()));
+    log.info(String.format(Constants.F_FINDING_ALL, "cards", cards.size()));
     return cards;
   }
 
@@ -87,7 +87,7 @@ public class EventController {
       }
     }
 
-    log.info(String.format(Constants.F_FINDING_ALL + "%n", "results", results.size()));
+    log.info(String.format(Constants.F_FINDING_ALL, "results", results.size()));
     return results;
   }
 
@@ -101,7 +101,7 @@ public class EventController {
       }
     }
 
-    log.info(String.format(Constants.F_FINDING_ALL + "%n", "dragonscript cards", cards.size()));
+    log.info(String.format(Constants.F_FINDING_ALL, "dragonscript cards", cards.size()));
     return cards;
   }
 

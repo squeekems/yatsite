@@ -6,7 +6,9 @@ import com.squeekems.yat.entities.Sentence;
 import com.squeekems.yat.services.EventService;
 import com.squeekems.yat.services.PlayerService;
 import com.squeekems.yat.services.SentenceService;
+import com.squeekems.yat.util.Constants;
 import com.squeekems.yat.util.IntroBuilder;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.File;
 import java.nio.file.Files;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+
 import static com.squeekems.yat.util.Constants.*;
 
 @RestController
@@ -165,6 +166,55 @@ public class GameController {
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
+  }
+
+  @GetMapping("/roll")
+  public int rollDice(@RequestParam int number, @RequestParam int sides) {
+    return Constants.rollDice(number, sides);
+  }
+
+  @GetMapping("/rollExplicit")
+  public List<Integer> rollDiceExplicit(@RequestParam int number, @RequestParam int sides) {
+    return Constants.rollDiceExplicit(number, sides);
+  }
+
+  /**
+   * Roll your stats by rolling 4 x 6-sided dice, dropping the lowest number, and adding the
+   * remaining total. Do this for each stat (there are 6). Alternatively, calculate your stats
+   * using the Point Buy or Standard Array, which don't require rolling and limit variation in
+   * character stats.
+   * @return map of 6 lists of dice roll results each list having 4 die results and the total
+   * minus the lowest result
+   */
+  @GetMapping("/rollCharacter")
+  public Map<Integer, List<Integer>> rollCharacter() {
+    Map<Integer, List<Integer>> stats = new HashMap<>();
+    int number = 4;
+    int sides = 6;
+
+    // For each stat (There are 6)
+    for (int i = 0; i < sides; i++) {
+
+      // Roll 4 dice
+      List<Integer> stat = rollDiceExplicit(number, sides);
+
+      // Sort lowest to highest
+      Collections.sort(stat);
+
+      // Reusable
+      int lowestValue = stat.get(0);
+
+      // Drop the lowest number from the total
+      stat.set(number, stat.get(number) - lowestValue);
+
+      // Make the lowest value negative for display purposes
+      stat.set(0, lowestValue * -1);
+
+      // Key is just to number our lists
+      stats.put(i + 1, stat);
+    }
+
+    return stats;
   }
 
   private Event destroyBuilding() {
