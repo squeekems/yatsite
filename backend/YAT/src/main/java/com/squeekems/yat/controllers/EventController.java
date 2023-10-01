@@ -7,15 +7,21 @@ import com.squeekems.yat.entities.utilityEntities.CardEvent;
 import com.squeekems.yat.entities.utilityEntities.OptionResult;
 import com.squeekems.yat.services.EventService;
 import com.squeekems.yat.services.OptionService;
+import com.squeekems.yat.util.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.squeekems.yat.util.Constants.CORS_URL;
+
 @RestController
 @RequestMapping("/events")
 public class EventController {
+  Logger log = LoggerFactory.getLogger(EventController.class);
 
   @Autowired
   EventService eventService;
@@ -51,7 +57,9 @@ public class EventController {
       card.setOptionResult(resultList);
       return card;
     } else {
-      return "No card found for eventId '" + id + "'";
+      String s = "No card found for eventId '" + id + "'";
+      log.info(s);
+      return s;
     }
   }
 
@@ -65,7 +73,7 @@ public class EventController {
       }
     }
 
-    System.out.println("Number of cards: " + cards.size());
+    log.info(String.format(Constants.F_FINDING_ALL + "%n", "cards", cards.size()));
     return cards;
   }
 
@@ -79,7 +87,7 @@ public class EventController {
       }
     }
 
-    System.out.println("Number of results: " + results.size());
+    log.info(String.format(Constants.F_FINDING_ALL + "%n", "results", results.size()));
     return results;
   }
 
@@ -93,12 +101,12 @@ public class EventController {
       }
     }
 
-    System.out.println("Number of dragonscript cards: " + cards.size());
+    log.info(String.format(Constants.F_FINDING_ALL + "%n", "dragonscript cards", cards.size()));
     return cards;
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")
-  @GetMapping("/get")
+  @CrossOrigin(origins = CORS_URL)
+  @GetMapping("/event")
   public Event getEvent(@RequestParam Long id) {
     return eventService.getById(id);
   }
@@ -107,7 +115,7 @@ public class EventController {
   public void addOption(@RequestParam("id") Long id,
                         @RequestParam("optionId") Long optionId) {
     Event event = eventService.getById(id);
-    Option option = optionService.getOptionById(optionId);
+    Option option = optionService.getById(optionId);
     event.getOptions().add(option);
     eventService.save(event);
   }
@@ -122,7 +130,7 @@ public class EventController {
   public void removeOption(@RequestParam("id") Long id,
                            @RequestParam("optionId") Long optionId) {
     Event event = eventService.getById(id);
-    Option option = optionService.getOptionById(optionId);
+    Option option = optionService.getById(optionId);
     event.getOptions().remove(option);
     eventService.save(event);
   }

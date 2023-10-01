@@ -18,22 +18,23 @@ public class OptionService {
   private OptionRepository optionRepository;
 
   public List<Option> findAll() {
-    log.info(String.format(Constants.fFindingAll + "%n", "options"));
-    return optionRepository.findAll();
+    List<Option> options = optionRepository.findAll();
+    log.info(String.format(Constants.F_FINDING_ALL + "%n", "options", options.size()));
+    return options;
   }
 
   public void save(Option option) {
-    log.info(String.format(Constants.fSaving + "%n", option));
+    log.info(String.format(Constants.F_SAVING + "%n", option));
     optionRepository.save(option);
   }
 
   public void delete(Option option) {
-    log.info(String.format(Constants.fDeleting + "%n", option));
+    log.info(String.format(Constants.F_DELETING + "%n", option));
     optionRepository.delete(option);
   }
 
-  public Option getOptionById(Long optionId) {
-    log.info(String.format(Constants.fGettingWithId + "%n", "option", optionId));
+  public Option getById(Long optionId) {
+    log.info(String.format(Constants.F_GETTING_WITH_ID + "%n", "option", optionId));
     return optionRepository.findById(optionId).orElseThrow();
   }
 }

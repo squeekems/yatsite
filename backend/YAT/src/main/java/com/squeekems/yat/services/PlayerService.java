@@ -18,22 +18,23 @@ public class PlayerService {
   private PlayerRepository playerRepository;
 
   public List<Player> findAll() {
-    log.info(String.format(Constants.fFindingAll + "%n", "players"));
-    return playerRepository.findAll();
+    List<Player> players = playerRepository.findAll();
+    log.info(String.format(Constants.F_FINDING_ALL + "%n", "players", players.size()));
+    return players;
   }
 
   public Player save(Player player) {
-    log.info(String.format(Constants.fSaving + "%n", player));
+    log.info(String.format(Constants.F_SAVING + "%n", player));
     return playerRepository.save(player);
   }
 
   public void delete(Player player) {
-    log.info(String.format(Constants.fDeleting + "%n", player));
+    log.info(String.format(Constants.F_DELETING + "%n", player));
     playerRepository.delete(player);
   }
 
   public Player getById(Long playerId) {
-    log.info(String.format(Constants.fGettingWithId + "%n", "player", playerId));
+    log.info(String.format(Constants.F_GETTING_WITH_ID + "%n", "player", playerId));
     return playerRepository.findById(playerId).orElseThrow();
   }
 }
