@@ -5,20 +5,24 @@ import './home.css';
 import { GameSetup } from '../components/GameSetup/GameSetup';
 import { Introduction } from '../components/Introduction/Introduction';
 import { Game } from '../components/Game/Game';
-export const HomePage = () => {
+import { Header } from '../components/Header/Header';
+import { useSessionStorage } from '../hooks/useSessionStorage';
 
-  const [event, setEvent] = useState<EventModel>(new EventModel(0, "", false, []));
+export const HomePage = () => {
+  const [sessionStarted, setSessionStarted] = useSessionStorage('sessionStarted', false);
+  const [event, setEvent] =  useSessionStorage('currentEvent', (new EventModel(0, "", false, [])));
+  const [displayGameSetup, setDisplayGameSetup] = useSessionStorage('displayGameSetup', true);
+  const [showIntro, setShowIntro] = useSessionStorage('showIntro', false);
+  const [startGamePlay, setStartGamePlay] = useSessionStorage('startGamePlay', false);
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState('');
-  const [intro, setIntro] = useState('');
-
-  const [displayGameSetup, setDisplayGameSetup] = useState(true);
-  const [showIntro, setShowIntro] = useState(false);
-  const [startGamePlay, setStartGamePlay] = useState(false);
 
   useEffect(() => {
-    startGame();
-    fetchData();
+    if (!sessionStarted) {
+      startGame();
+      fetchData();
+      setSessionStarted(true);
+    }
     setIsLoading(false);
   }, []);
 
@@ -26,9 +30,9 @@ export const HomePage = () => {
   const fetchData = async (eventId: number = 309): Promise<void> => {
     try {
       const url: string = `http://localhost:8080/game/event?id=${eventId}`;
-      console.log('url', url)
+      console.log('fetch data url', url)
       const response = await fetch(url);
-      setEvent(await processData(response))
+      setEvent(await processData(response));
     } catch (error) {
       console.log(`Failed to fetch from database`, error);
     }
@@ -37,7 +41,7 @@ export const HomePage = () => {
   const startGame = async (): Promise<void> => {
     try {
       const url: string = `http://localhost:8080/game/start`;
-      console.log('url', url)
+      console.log('start game url', url)
       const response = await fetch(url);
       console.log(response)
     } catch (error) {
@@ -50,7 +54,9 @@ export const HomePage = () => {
       setHttpError('An error has occurred');
       throw new Error('Something went wrong!');
     }
+    console.log(responseData)
     const responseJson = await responseData.json();
+    console.log('responseJson', responseJson)
     const loadedEvent: EventModel = responseJson;
 
     loadedEvent.options.sort((a, b) => a.optionId - b.optionId);
@@ -70,6 +76,7 @@ export const HomePage = () => {
 
   return (
     <>
+      <Header />
       {isLoading && <SpinningLoading />}
 
       {httpError && <div className='container m-5'><p>{httpError}</p></div>}

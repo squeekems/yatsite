@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useSessionStorage } from '../../hooks/useSessionStorage';
 
 import EventModel from "../../models/EventModel";
 import { Message } from "../Message/Message";
@@ -16,11 +16,10 @@ export const GameSetup = (
       getIntro: () => void
     }
 ) => {
-  const [ displayUsernameInput, setDisplayUsernameInput ] = useState(false);
-  const [ showGreetTraveler, setShowGreetTraveler ] = useState(false);
-  const [ username, setUsername ] = useState('');
+  const [displayUsernameInput, setDisplayUsernameInput] = useSessionStorage('displayUsernameInput', false);
+  const [showGreetTraveler, setShowGreetTraveler] = useSessionStorage('showGreetTraveler', false);
+  const [username, setUsername] = useSessionStorage('username', '');
 
-  
   const showUsernameInput = (display: boolean) => {
     setDisplayUsernameInput(display);
   }
@@ -29,7 +28,7 @@ export const GameSetup = (
   const updateUsername = (name: string) => {
     setUsername(name);
   }
-  
+
   const resetUsername = () => {
     setUsername('');
   }
@@ -42,7 +41,7 @@ export const GameSetup = (
   const updateDisplayStates = () => {
     setDisplayUsernameInput(false);
     setShowGreetTraveler(true);
-   }
+  }
 
   return (
     <>

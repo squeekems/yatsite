@@ -1,0 +1,8 @@
+:root {
+  --orange: #CC9544;
+  --brown: #1C0A00;
+  --red: #2B0300;
+  --dark-brown: #1A0100;
+  --active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --active-border-color: #001100;
+}
