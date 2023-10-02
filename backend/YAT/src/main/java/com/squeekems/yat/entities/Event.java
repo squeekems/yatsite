@@ -20,7 +20,16 @@ public class Event {
   private String dsPrompt;
   @Column
   private boolean isCard;
-
+  @OrderColumn(name = "index")
+  private List<Integer> rollGoal;
+  @OrderColumn(name = "index")
+  private List<Integer> numberOfDice;
+  @OrderColumn(name = "index")
+  private List<Integer> sidesPerDie;
+  @OrderColumn(name = "index")
+  private List<Long> itemIdCheck;
+  @OrderColumn(name = "index")
+  private List<String> flagList;
   @ManyToMany(targetEntity = Option.class, fetch = FetchType.EAGER)
   @JsonManagedReference
   @JoinTable( name = "event_options", joinColumns = { @JoinColumn(name = "event_id") },
@@ -90,6 +99,14 @@ public class Event {
     isCard = card;
   }
 
+  public List<String> getFlagList() {
+    return flagList;
+  }
+
+  public void setFlagList(List<String> flagList) {
+    this.flagList = flagList;
+  }
+
   public Set<Option> getOptions() {
     return options;
   }
@@ -108,6 +125,7 @@ public class Event {
     if (isCard != event.isCard) return false;
     if (!prompt.equals(event.prompt)) return false;
     if (!Objects.equals(dsPrompt, event.dsPrompt)) return false;
+    if (!Objects.equals(flagList, event.flagList)) return false;
     return Objects.equals(options, event.options);
   }
 
@@ -124,15 +142,18 @@ public class Event {
 
     result = 31 * result + (dsPrompt != null ? dsPrompt.hashCode() : 0);
     result = 31 * result + (isCard ? 1 : 0);
+    result = 31 * result + (flagList != null ? flagList.hashCode() : 0);
     result = 31 * result + (options != null ? optionIds.hashCode() : 0);
     return result;
   }
 
   @Override
   public String toString() {
-    Set<Long> optionIds = new HashSet<>();
+    Set<Long> optionIds = null;
 
     if (options != null) {
+      optionIds = new HashSet<>();
+      
       for (Option option : options) {
         optionIds.add(option.getOptionId());
       }
@@ -143,6 +164,7 @@ public class Event {
         ", prompt='" + prompt + '\'' +
         ", dsPrompt='" + dsPrompt + '\'' +
         ", isCard=" + isCard +
+        ", flagList=" + flagList +
         (options != null ? ", options=" + optionIds : "") +
         '}';
   }

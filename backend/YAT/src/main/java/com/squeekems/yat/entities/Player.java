@@ -1,9 +1,12 @@
 package com.squeekems.yat.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.squeekems.yat.util.Constants;
 import jakarta.persistence.*;
 
 import java.util.List;
+
+import static com.squeekems.yat.util.Constants.rollDice;
 
 @Entity
 @Table(name = "players")
@@ -19,6 +22,8 @@ public class Player {
   private int position;
   @Column
   private int skipCounter;
+  private int savingThrowCounter;
+  private List<Long> inventory;
 
   public Player() {
     position = 1;
@@ -78,6 +83,22 @@ public class Player {
 
   public void setSkipCounter(int skipCounter) {
     this.skipCounter = skipCounter;
+  }
+
+  public int getSavingThrowCounter() {
+    return savingThrowCounter;
+  }
+
+  public void setSavingThrowCounter(int savingThrowCounter) {
+    this.savingThrowCounter = savingThrowCounter;
+  }
+
+  public List<Long> getInventory() {
+    return inventory;
+  }
+
+  public void setInventory(List<Long> inventory) {
+    this.inventory = inventory;
   }
 
   @Override

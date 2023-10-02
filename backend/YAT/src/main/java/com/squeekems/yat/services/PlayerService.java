@@ -8,7 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.squeekems.yat.util.Constants.rollDice;
 
 @Service
 public class PlayerService {
@@ -36,5 +39,25 @@ public class PlayerService {
   public Player getById(Long playerId) {
     log.info(String.format(Constants.F_GETTING_WITH_ID, "player", playerId));
     return playerRepository.findById(playerId).orElseThrow();
+  }
+
+  public void rollSavingThrowFor(Player player) {
+    int result = rollDice(1, 20);
+    int savingThrowCounter = player.getSavingThrowCounter();
+
+    if (result > savingThrowCounter) {
+      player.setSavingThrowCounter(savingThrowCounter + 1);
+      save(player);
+    } else {
+      player.setSavingThrowCounter(0);
+      player.setPosition(player.getPosition() - 1);
+      player.setInventory(new ArrayList<>());
+      save(player);
+    }
+  }
+
+  public void addSkipTo(Player player) {
+    player.setSkipCounter(player.getSkipCounter() + 1);
+    save(player);
   }
 }

@@ -34,6 +34,8 @@ public class Constants {
   public static final String SKIP_QUEUE = "Skip your next turn.";
   public static final String FLAG_SKIP = "skip";
   public static final String FLAG_ROLL = "roll";
+  public static final String FLAG_INVENTORY = "inventory";
+  public static final String FLAG_SAVING_THROW = "saving-throw";
 
   public static int rollDice(int number, int sides) {
     int result = 0;
