@@ -15,7 +15,7 @@ public class PlayerController {
   private PlayerService playerService;
 
   @CrossOrigin(origins = CORS_URL)
-  @PostMapping("/post")
+  @PostMapping("/player")
   public void postPlayer(@RequestParam("room") int room,
                          @RequestParam("username") String username) {
     Player player = new Player(room, username);

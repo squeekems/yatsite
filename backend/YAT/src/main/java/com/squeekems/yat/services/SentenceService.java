@@ -31,9 +31,9 @@ public class SentenceService {
     return sentences;
   }
 
-  public void save(Sentence sentence) {
+  public Sentence save(Sentence sentence) {
     log.info(String.format(Constants.F_SAVING, sentence));
-    sentenceRepository.save(sentence);
+    return sentenceRepository.save(sentence);
   }
 
   public void delete(Sentence sentence) {

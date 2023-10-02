@@ -23,9 +23,9 @@ public class OptionService {
     return options;
   }
 
-  public void save(Option option) {
+  public Option save(Option option) {
     log.info(String.format(Constants.F_SAVING, option));
-    optionRepository.save(option);
+    return optionRepository.save(option);
   }
 
   public void delete(Option option) {

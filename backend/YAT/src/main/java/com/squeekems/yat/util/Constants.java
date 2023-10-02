@@ -44,16 +44,4 @@ public class Constants {
 
     return result;
   }
-
-  public static List<Integer> rollDiceExplicit(int number, int sides) {
-    List<Integer> results = new ArrayList<>();
-    int total = 0;
-    for (int i = 0; i < number; i++) {
-      int result = new Random().nextInt(sides) + 1;
-      results.add(result);
-      total += result;
-    }
-    results.add(total);
-    return results;
-  }
 }

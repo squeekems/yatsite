@@ -20,8 +20,4 @@ public class ItemController {
   public List<Item> getItems() {
     return itemService.findAll();
   }
-
-  public void save(Item item) {
-    itemService.save(item);
-  }
 }

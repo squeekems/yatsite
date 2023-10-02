@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "2c06e909-2b5c-4cff-989d-39c7c3510440",
+		"_postman_id": "bad87cd7-943d-405f-8882-0cb82be2dcd6",
 		"name": "YAT",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29479535"
 	},
 	"item": [
 		{
@@ -358,19 +359,25 @@
 							"response": []
 						},
 						{
-							"name": "Results",
+							"name": "Event",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/events/results",
+									"raw": "localhost:8080/events/event?id=63",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
 										"events",
-										"results"
+										"event"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "63"
+										}
 									]
 								}
 							},
@@ -390,6 +397,50 @@
 									"path": [
 										"events",
 										"cards"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Card",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/events/card?id=83",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"events",
+										"card"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "83"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Results",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/events/results",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"events",
+										"results"
 									]
 								}
 							},
@@ -417,112 +468,21 @@
 						{
 							"name": "Event",
 							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/events/get?id=152",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"events",
-										"get"
-									],
-									"query": [
-										{
-											"key": "id",
-											"value": "152"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "addOption",
-							"request": {
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/events/addOption?id=309&optionId=256",
+									"raw": "localhost:8080/events/event?prompt=Draw a card from the Lesser Loot pile.",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
 										"events",
-										"addOption"
+										"event"
 									],
 									"query": [
 										{
-											"key": "id",
-											"value": "309"
-										},
-										{
-											"key": "optionId",
-											"value": "256"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Add Option String",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/events/addOptionString?id=0&option=I take the item.",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"events",
-										"addOptionString"
-									],
-									"query": [
-										{
-											"key": "id",
-											"value": "0"
-										},
-										{
-											"key": "option",
-											"value": "I take the item."
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Add Option Strings",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/events/addOptionStrings?id=0&option=I take the item.&result=Draw a card from the Lesser Loot pile.",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"events",
-										"addOptionStrings"
-									],
-									"query": [
-										{
-											"key": "id",
-											"value": "0"
-										},
-										{
-											"key": "option",
-											"value": "I take the item."
-										},
-										{
-											"key": "result",
+											"key": "prompt",
 											"value": "Draw a card from the Lesser Loot pile."
 										}
 									]
@@ -533,108 +493,17 @@
 						{
 							"name": "Event",
 							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/events/post?prompt=Draw a card from the Lesser Loot pile.",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"events",
-										"post"
-									],
-									"query": [
-										{
-											"key": "prompt",
-											"value": "Draw a card from the Lesser Loot pile."
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Event Full",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/events/postFull?prompt=Is there another player who has not told us where they are in the tavern?&isCard=false&options=Yes, No&results=Where are they in the tavern?, Then we can begin with our story...",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"events",
-										"postFull"
-									],
-									"query": [
-										{
-											"key": "prompt",
-											"value": "Is there another player who has not told us where they are in the tavern?"
-										},
-										{
-											"key": "isCard",
-											"value": "false"
-										},
-										{
-											"key": "options",
-											"value": "Yes, No"
-										},
-										{
-											"key": "results",
-											"value": "Where are they in the tavern?, Then we can begin with our story..."
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "removeOption",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/events/removeOption?id=0&optionId=0",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"events",
-										"removeOption"
-									],
-									"query": [
-										{
-											"key": "id",
-											"value": "0"
-										},
-										{
-											"key": "optionId",
-											"value": "0"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "delete",
-							"request": {
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/events/delete?id=132",
+									"raw": "localhost:8080/events/event?id=132",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
 										"events",
-										"delete"
+										"event"
 									],
 									"query": [
 										{
@@ -675,127 +544,19 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/options/get?id=253",
+									"raw": "localhost:8080/options/option?id=253",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
 										"options",
-										"get"
+										"option"
 									],
 									"query": [
 										{
 											"key": "id",
 											"value": "253"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Result",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/options/result?id=253",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"options",
-										"result"
-									],
-									"query": [
-										{
-											"key": "id",
-											"value": "253"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Option",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/options/post?label=I grab the item.",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"options",
-										"post"
-									],
-									"query": [
-										{
-											"key": "label",
-											"value": "I grab the item."
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Option String",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/options/postString?label=I grab the item.&result=Draw a card from the Lesser Loot pile.",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"options",
-										"postString"
-									],
-									"query": [
-										{
-											"key": "label",
-											"value": "I grab the item."
-										},
-										{
-											"key": "result",
-											"value": "Draw a card from the Lesser Loot pile."
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "setResult",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/options/setResult?id=0&resultId=0",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"options",
-										"setResult"
-									],
-									"query": [
-										{
-											"key": "id",
-											"value": "0"
-										},
-										{
-											"key": "resultId",
-											"value": "0"
 										}
 									]
 								}
@@ -861,14 +622,14 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "localhost:8080/players/post?room=312&username=Squeek",
+									"raw": "localhost:8080/players/player?room=312&username=Squeek",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
 										"players",
-										"post"
+										"player"
 									],
 									"query": [
 										{
@@ -878,35 +639,6 @@
 										{
 											"key": "username",
 											"value": "Squeek"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "post Copy",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/players/post?room=310&username=Eric",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"players",
-										"post"
-									],
-									"query": [
-										{
-											"key": "room",
-											"value": "310"
-										},
-										{
-											"key": "username",
-											"value": "Eric"
 										}
 									]
 								}
@@ -989,6 +721,60 @@
 									"path": [
 										"game",
 										"newGame"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Roll",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/game/roll?number=4&sides=6",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"game",
+										"roll"
+									],
+									"query": [
+										{
+											"key": "number",
+											"value": "4"
+										},
+										{
+											"key": "sides",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Event",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/game/event?id=63",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"game",
+										"event"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "63"
+										}
 									]
 								}
 							},

@@ -1,19 +1,21 @@
 package com.squeekems.yat.controllers;
 
-import com.squeekems.yat.entities.utilityEntities.Card;
 import com.squeekems.yat.entities.Event;
 import com.squeekems.yat.entities.Option;
+import com.squeekems.yat.entities.utilityEntities.Card;
 import com.squeekems.yat.entities.utilityEntities.CardEvent;
 import com.squeekems.yat.entities.utilityEntities.OptionResult;
 import com.squeekems.yat.services.EventService;
-import com.squeekems.yat.services.OptionService;
 import com.squeekems.yat.util.Constants;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.squeekems.yat.util.Constants.CORS_URL;
@@ -26,12 +28,29 @@ public class EventController {
   @Autowired
   EventService eventService;
 
-  @Autowired
-  OptionService optionService;
-
   @GetMapping
   public List<Event> getEvents() {
     return eventService.findAll();
+  }
+
+  @CrossOrigin(origins = CORS_URL)
+  @GetMapping("/event")
+  public Event getEvent(@RequestParam Long id) {
+    return eventService.getById(id);
+  }
+
+  @GetMapping("/cards")
+  public List<Event> getCards() {
+    List<Event> cards = new ArrayList<>();
+
+    for (Event event: eventService.findAll()) {
+      if (event.isCard()) {
+        cards.add(event);
+      }
+    }
+
+    log.info(String.format(Constants.F_FINDING_ALL, "cards", cards.size()));
+    return cards;
   }
 
   @GetMapping("/card")
@@ -41,7 +60,7 @@ public class EventController {
     cardEvent.setEventId(event.getEventId());
     cardEvent.setPrompt(event.getPrompt());
     cardEvent.setDsPrompt(event.getDsPrompt());
-    if (event != null && event.isCard()) {
+    if (event.isCard()) {
       Card card = new Card();
       List<OptionResult> resultList = new ArrayList<>();
       for (Option option : event.getOptions()) {
@@ -61,20 +80,6 @@ public class EventController {
       log.info(s);
       return s;
     }
-  }
-
-  @GetMapping("/cards")
-  public List<Event> getCards() {
-    List<Event> cards = new ArrayList<>();
-
-    for (Event event: eventService.findAll()) {
-      if (event.isCard()) {
-        cards.add(event);
-      }
-    }
-
-    log.info(String.format(Constants.F_FINDING_ALL, "cards", cards.size()));
-    return cards;
   }
 
   @GetMapping("/results")
@@ -105,37 +110,18 @@ public class EventController {
     return cards;
   }
 
-  @CrossOrigin(origins = CORS_URL)
-  @GetMapping("/event")
-  public Event getEvent(@RequestParam Long id) {
-    return eventService.getById(id);
-  }
-
-  @RequestMapping("/addOption")
-  public void addOption(@RequestParam("id") Long id,
-                        @RequestParam("optionId") Long optionId) {
-    Event event = eventService.getById(id);
-    Option option = optionService.getById(optionId);
-    event.getOptions().add(option);
-    eventService.save(event);
-  }
-
-  @RequestMapping("/post")
+  @PostMapping("/event")
   public void postEvent(@RequestParam("prompt") String prompt) {
-    Event event = new Event(prompt);
-    eventService.save(event);
+    try {
+      Event event = new Event(prompt);
+      eventService.save(event);
+    } catch (DataIntegrityViolationException e) {
+      log.info("Retrying after catching: \n" + e.getMessage());
+      postEvent(prompt);
+    }
   }
 
-  @RequestMapping("/removeOption")
-  public void removeOption(@RequestParam("id") Long id,
-                           @RequestParam("optionId") Long optionId) {
-    Event event = eventService.getById(id);
-    Option option = optionService.getById(optionId);
-    event.getOptions().remove(option);
-    eventService.save(event);
-  }
-
-  @RequestMapping("/delete")
+  @DeleteMapping("/event")
   public void deleteById(@RequestParam("id")Long id) {
     eventService.deleteById(id);
   }
