@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 @Component
@@ -34,14 +32,4 @@ public class Constants {
   public static final String SKIP_QUEUE = "Skip your next turn.";
   public static final String FLAG_SKIP = "skip";
   public static final String FLAG_ROLL = "roll";
-
-  public static int rollDice(int number, int sides) {
-    int result = 0;
-
-    for (int i = 0; i < number; i++) {
-      result += new Random().nextInt(sides) + 1;
-    }
-
-    return result;
-  }
 }

@@ -7,7 +7,6 @@ import com.squeekems.yat.entities.utilityEntities.CardEvent;
 import com.squeekems.yat.entities.utilityEntities.OptionResult;
 import com.squeekems.yat.services.EventService;
 import com.squeekems.yat.util.Constants;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.squeekems.yat.util.Constants.CORS_URL;

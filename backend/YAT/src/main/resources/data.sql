@@ -247,6 +247,7 @@ INSERT INTO events (event_id, ds_prompt, is_card, prompt) VALUES (312, NULL, FAL
 INSERT INTO events (event_id, ds_prompt, is_card, prompt) VALUES (313, NULL, FALSE, 'Search the Lesser Loot pile for a card titled, "Bucket" and put it in your equip slot. Is there another player?');
 INSERT INTO events (event_id, ds_prompt, is_card, prompt) VALUES (314, NULL, FALSE, 'The dragon slams down before you with a rumble. It is ready to attack.');
 INSERT INTO events (event_id, ds_prompt, is_card, prompt) VALUES (315, NULL, FALSE, 'The dragon is unimpressed. It spins and slams you with its tail. You go flying through a some rubble. Good thing there are no buildings left. Roll a Saving Throw.');
+ALTER TABLE events ALTER COLUMN event_id RESTART WITH (SELECT MAX(event_id) FROM events) + 1;
 
 INSERT INTO `options` (`option_id`, `label`, `result_id`) VALUES (1, 'I attempt to rob the merchant.', 1);
 INSERT INTO `options` (`option_id`, `label`, `result_id`) VALUES (2, 'I offer my coin.', 2);

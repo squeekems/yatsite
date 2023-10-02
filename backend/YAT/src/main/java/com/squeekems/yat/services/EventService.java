@@ -25,8 +25,9 @@ public class EventService {
   }
 
   public Event save(Event event) {
+    event = eventRepository.save(event);
     log.info(String.format(Constants.F_SAVING, event));
-    return eventRepository.save(event);
+    return event;
   }
 
   public void delete(Event event) {

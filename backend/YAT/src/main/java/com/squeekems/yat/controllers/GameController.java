@@ -170,7 +170,13 @@ public class GameController {
 
   @GetMapping("/roll")
   public int rollDice(@RequestParam int number, @RequestParam int sides) {
-    return Constants.rollDice(number, sides);
+    int result = 0;
+
+    for (int i = 0; i < number; i++) {
+      result += new Random().nextInt(sides) + 1;
+    }
+
+    return result;
   }
 
   private Event destroyBuilding() {

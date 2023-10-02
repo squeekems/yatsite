@@ -51,7 +51,8 @@ public class CatTreeController {
 
     String tableNameSingular = tableName.substring(0, tableName.length() - 1);
 
-    ourBest("ALTER TABLE " + tableName + " ALTER COLUMN " + tableNameSingular + "_id RESTART WITH (SELECT MAX(" + tableNameSingular + "_id) FROM " + tableName + ") + 1");
+    ourBest("ALTER TABLE " + tableName + " ALTER COLUMN " + tableNameSingular + "_id RESTART " +
+        "WITH (SELECT MAX(" + tableNameSingular + "_id) FROM " + tableName + ") + 1");
 
     sql.append(tableName).append('(');
 

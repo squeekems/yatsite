@@ -271,6 +271,7 @@ INSERT INTO events (event_id, ds_prompt, is_card, prompt) VALUES (310, NULL, FAL
 INSERT INTO events (event_id, ds_prompt, is_card, prompt) VALUES (311, NULL, FALSE, 'Search the Lesser Loot pile for a card titled, "Knife" and put it in your equip slot. Is there another player?');
 INSERT INTO events (event_id, ds_prompt, is_card, prompt) VALUES (312, NULL, FALSE, 'Search the Lesser Loot pile for a card titled, "Tome of Bludgeoning" and put it in your equip slot. Is there another player?');
 INSERT INTO events (event_id, ds_prompt, is_card, prompt) VALUES (313, NULL, FALSE, 'Search the Lesser Loot pile for a card titled, "Bucket" and put it in your equip slot. Is there another player?');
+ALTER TABLE events ALTER COLUMN event_id RESTART WITH (SELECT MAX(event_id) FROM events) + 1;
 
 INSERT INTO `options` (`option_id`, `label`, `result_id`) VALUES (1, 'I attempt to rob the merchant.', 1);
 INSERT INTO `options` (`option_id`, `label`, `result_id`) VALUES (2, 'I offer my coin.', 2);
