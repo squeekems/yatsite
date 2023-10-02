@@ -36,6 +36,7 @@ public class Constants {
   public static final String FLAG_ROLL = "roll";
   public static final String FLAG_INVENTORY = "inventory";
   public static final String FLAG_SAVING_THROW = "saving-throw";
+  public static final String FLAG_COMBAT = "combat";
 
   public static int rollDice(int number, int sides) {
     int result = 0;

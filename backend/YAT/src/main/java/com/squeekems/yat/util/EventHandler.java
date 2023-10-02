@@ -28,6 +28,7 @@ public class EventHandler {
         case FLAG_ROLL -> rollDice(1, 20);
         case FLAG_INVENTORY -> System.out.println("youGoodHolmes()");
         case FLAG_SAVING_THROW -> playerService.rollSavingThrowFor(badLuckBrandon);
+        case FLAG_COMBAT -> {}
         default -> {}
       }
     }
