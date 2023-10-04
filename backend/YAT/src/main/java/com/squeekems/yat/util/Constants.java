@@ -32,4 +32,23 @@ public class Constants {
   public static final String SKIP_QUEUE = "Skip your next turn.";
   public static final String FLAG_SKIP = "skip";
   public static final String FLAG_ROLL = "roll";
+
+  public static enum roomFlags {
+    intro,
+    barSentence,
+    barToDiningTransition,
+    barToLibraryTransition,
+    barToPersonalTransition,
+    barToConcludingTransition,
+    diningSentence,
+    diningToLibraryTransition,
+    diningToPersonalTransition,
+    diningToConcludingTransition,
+    librarySentence,
+    libraryToPersonalTransition,
+    libraryToConcludingTransition,
+    personalSentence,
+    personalToConcludingTransition,
+    concludingSentence
+  }
 }

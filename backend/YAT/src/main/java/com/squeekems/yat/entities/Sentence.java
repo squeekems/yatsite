@@ -41,4 +41,13 @@ public class Sentence {
   public void setFlag(String flag) {
     this.flag = flag;
   }
+
+  @Override
+  public String toString() {
+    return "Sentence{" +
+        "id=" + id +
+        ", sentence='" + sentence + '\'' +
+        ", flag='" + flag + '\'' +
+        '}';
+  }
 }

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+import static com.squeekems.yat.util.Constants.roomFlags.*;
+
 @Component
 public class IntroBuilder {
   @Autowired
@@ -33,57 +35,57 @@ public class IntroBuilder {
     List<Integer> rooms = new ArrayList<>(setRooms);
     System.out.println("rooms=" + rooms);
 
-    flagFinder(s, "intro");
+    flagFinder(s, intro.name());
 
     for (int i = 0; i < rooms.size(); i++) {
       System.out.println("i='" + i + "'");
       switch (rooms.get(i)) {
         case 310 -> {
-          flagFinder(s, "barSentence");
+          flagFinder(s, barSentence.name());
           if (i + 1 != rooms.size()) {
             switch (rooms.get(i + 1)) {
-              case 311 -> flagFinder(s, "barToDiningTransition");
-              case 312 -> flagFinder(s, "barToLibraryTransition");
-              case 313 -> flagFinder(s, "barToPersonalTransition");
+              case 311 -> flagFinder(s, barToDiningTransition.name());
+              case 312 -> flagFinder(s, barToLibraryTransition.name());
+              case 313 -> flagFinder(s, barToPersonalTransition.name());
               default -> sayOops();
             }
           }
           if (i == rooms.size() - 1) {
-            flagFinder(s, "barToConcludingTransition");
+            flagFinder(s, barToConcludingTransition.name());
           }
         }
         case 311 -> {
-          flagFinder(s, "diningSentence");
+          flagFinder(s, diningSentence.name());
           if (i + 1 != rooms.size()) {
             switch (rooms.get(i + 1)) {
-              case 312 -> flagFinder(s, "diningToLibraryTransition");
-              case 313 -> flagFinder(s, "diningToPersonalTransition");
+              case 312 -> flagFinder(s, diningToLibraryTransition.name());
+              case 313 -> flagFinder(s, diningToPersonalTransition.name());
               default -> sayOops();
             }
           }
           if (i == rooms.size() - 1) {
-            flagFinder(s, "diningToConcludingTransition");
+            flagFinder(s, diningToConcludingTransition.name());
           }
         }
         case 312 -> {
-          flagFinder(s, "librarySentence");
+          flagFinder(s, librarySentence.name());
           if (i + 1 != rooms.size()) {
             if (rooms.get(i + 1) == 313) {
-              flagFinder(s, "libraryToPersonalTransition");
+              flagFinder(s, libraryToPersonalTransition.name());
             }
           }
           if (i == rooms.size() - 1) {
-            flagFinder(s, "libraryToConcludingTransition");
+            flagFinder(s, libraryToConcludingTransition.name());
           }
         }
         case 313 -> {
-          flagFinder(s, "personalSentence");
-          flagFinder(s,"personalToConcludingTransition");
+          flagFinder(s, personalSentence.name());
+          flagFinder(s, personalToConcludingTransition.name());
         }
         default -> sayOops();
       }
     }
-    flagFinder(s, "concludingSentence");
+    flagFinder(s, concludingSentence.name());
     return s.toString();
   }
 
