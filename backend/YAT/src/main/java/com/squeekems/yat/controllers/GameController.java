@@ -6,9 +6,7 @@ import com.squeekems.yat.entities.Sentence;
 import com.squeekems.yat.services.EventService;
 import com.squeekems.yat.services.PlayerService;
 import com.squeekems.yat.services.SentenceService;
-import com.squeekems.yat.util.Constants;
 import com.squeekems.yat.util.IntroBuilder;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import java.io.File;
 import java.nio.file.Files;
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import static com.squeekems.yat.util.Constants.*;
 
@@ -32,9 +32,9 @@ public class GameController {
   PlayerService playerService;
   @Autowired
   SentenceService sentenceService;
-  private List<Long> eventCards;
-  private List<Long> players;
-  private int playerPointer = 1;
+  List<Long> eventCards;
+  List<Long> players;
+  int playerPointer = 1;
   List<Sentence> buildings;
 
   @CrossOrigin(origins = CORS_URL)
