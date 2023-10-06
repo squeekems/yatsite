@@ -24,9 +24,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.squeekems.yat.util.Constants.FLAG_SKIP;
 import static com.squeekems.yat.util.Constants.SKIP_QUEUE;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -111,8 +111,21 @@ class GameControllerTest {
   }
 
   @ParameterizedTest
-  @CsvSource({"5, true", "115, true", "115, false"})
-  void getEvent(Long id, boolean buildingsIsZero) throws Exception {
+  @CsvSource({
+      "5, true, true, false",
+      "5, true, false, true",
+      "5, true, false, false",
+      "5, false, true, false",
+      "5, false, false, true",
+      "5, false, false, false",
+      "115, true, true, false",
+      "115, true, false, true",
+      "115, true, false, false",
+      "115, false, true, false",
+      "115, false, false, true",
+      "115, false, false, false"
+  })
+  void getEvent(Long id, boolean buildingsIsZero, boolean containsSkipQueue, boolean isCard) throws Exception {
     // Given:
     gameController.players = new ArrayList<>();
     gameController.buildings = new ArrayList<>();
@@ -127,7 +140,12 @@ class GameControllerTest {
         Long eventId = (Long) invocationOnMock.getArgument(0);
         Event event = new Event();
         event.setEventId(eventId);
-        event.setPrompt(SKIP_QUEUE);
+        if (containsSkipQueue) {
+          event.setPrompt(SKIP_QUEUE);
+        } else {
+          event.setPrompt("testPrompt");
+        }
+        event.setCard(isCard);
         return event;
       }
     });
@@ -144,28 +162,33 @@ class GameControllerTest {
 
     // When:
     ResultActions result = mockMvc.perform(
-        get("/game/event").param("id",id.toString())
+        get("/game/event").param("id", id.toString())
     );
 
     // Then:
     verify(eventService).getById(id);
-    verify(playerService).getById(any(Long.class));
+    if (containsSkipQueue) {
+      verify(playerService).getById(any(Long.class));
+    }
     if (id == 115L && buildingsIsZero) {
       verify(eventService).getById(315L);
     }
     result.andExpect(status().isOk());
   }
 
-  @Test
-  void getRandom() throws Exception {
+  @ParameterizedTest
+  @ValueSource(longs = {1, 2})
+  void getRandom(long deckSize) throws Exception { // We need to handle errors thrown by shuffleDeck
     // Given:
     gameController.eventCards = new ArrayList<>();
-    gameController.eventCards.add(0L);
+    for (long i = 0; i < deckSize; i++) {
+      gameController.eventCards.add(i);
+    }
     when(eventService.getById(any(Long.class))).then(new Answer<Event>() {
       @Override
       public Event answer(InvocationOnMock invocationOnMock) throws Throwable {
         Event event = new Event();
-        
+
         event.setEventId(0L);
 
         return event;
@@ -182,29 +205,90 @@ class GameControllerTest {
   }
 
   @Test
-  void getDragon() {
+  void getDragon() throws Exception {
+    // Given:
+    Long id = 314L;
+
+    // When:
+    ResultActions result = mockMvc.perform(
+        get("/game/dragon").param("id", id.toString())
+    );
+
+    // Then:
+    verify(eventService).getById(id);
+    result.andExpect(status().isOk());
+  }
+
+  @ParameterizedTest
+  @CsvSource({
+      "0, 0, 0",
+      "1, 0, 0",
+      "2, 0, 0",
+      "3, 0, 0",
+      "0, 3, 0",
+      "0, 3, 1"
+  })
+  void incrementPlayerPointer(int buildingsRemaining, int numberOfPlayers, int numberOfSkips) throws Exception {
+    // Given:
+    gameController.players = new ArrayList<>();
+    gameController.buildings = new ArrayList<>();
+
+    for (int i = 0; i < numberOfPlayers; i++) {
+      gameController.players.add((long) i);
+    }
+    for (int i = 0; i < buildingsRemaining; i++) {
+      gameController.buildings.add(new Sentence());
+    }
+    when(playerService.getById(any(Long.class))).then(new Answer<Player>() {
+      @Override
+      public Player answer(InvocationOnMock invocationOnMock) throws Throwable {
+        Player newPlayer = new Player();
+
+        newPlayer.setPlayerId(invocationOnMock.getArgument(0));
+        newPlayer.setSkipCounter(numberOfSkips);
+
+        return newPlayer;
+      }
+    });
+
+    // When:
+    ResultActions result = mockMvc.perform(get("/game/increment-turn"));
+
+    // Then:
+    if (numberOfPlayers > 1) {
+      verify(playerService).getById(any(Long.class));
+    }
+    result.andExpect(status().isOk());
   }
 
   @Test
-  void incrementPlayerPointer() {
+  void newGame() throws Exception { // We need to handle exceptions thrown by this method
+    // Given:
+
+    // When:
+    ResultActions result = mockMvc.perform(get("/game/newGame"));
+
+    // Then:
+    result.andExpect(status().isOk());
   }
 
-  @Test
-  void newGame() {
-  }
+  @ParameterizedTest
+  @CsvSource({"1, 20", "2, 6"})
+  void rollDice(int number, int sides) throws Exception {
+    // Given:
+    // Parameters
 
-//  @ParameterizedTest
-//  @CsvSource({"1, 20", "2, 6"})
-//  void rollDice(int number, int sides) {
-//    // Given:
-//    // Parameters
-//
-//    // When:
-//    int actual = rollDice(number, sides);
-//    System.out.println("Given: number: " + number + " sides: " + sides + " actual: " + actual);
-//
-//    // Then:
-//    assertTrue(actual >= number);
-//    assertTrue(actual <= sides * number);
-//  }
+    // When:
+    ResultActions result = mockMvc.perform(
+        get("/game/roll")
+            .param("number", String.valueOf(number))
+            .param("sides", String.valueOf(sides))
+    );
+    int actual = Integer.parseInt(result.andReturn().getResponse().getContentAsString());
+
+    // Then:
+    result.andExpect(status().isOk());
+    assertTrue(actual >= number);
+    assertTrue(actual <= sides * number);
+  }
 }

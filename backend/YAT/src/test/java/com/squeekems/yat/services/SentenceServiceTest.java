@@ -2,7 +2,6 @@ package com.squeekems.yat.services;
 
 import com.squeekems.yat.entities.Sentence;
 import com.squeekems.yat.repositories.SentenceRepository;
-import com.squeekems.yat.util.Constants;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

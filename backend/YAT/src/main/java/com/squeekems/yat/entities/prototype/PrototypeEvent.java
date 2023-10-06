@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.squeekems.yat.entities.Option;
 import jakarta.persistence.*;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "prototype_events")

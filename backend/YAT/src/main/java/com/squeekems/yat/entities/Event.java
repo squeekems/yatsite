@@ -1,10 +1,11 @@
 package com.squeekems.yat.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.squeekems.yat.util.Constants;
 import jakarta.persistence.*;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "events")
